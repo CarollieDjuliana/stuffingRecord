@@ -1,0 +1,41 @@
+.bg-custom {
+    background-color: #E5D758;
+}
+
+#side_nav{
+    background: #000000ca;
+    min-width: 300px;
+    max-width: 300px
+}
+
+.content{
+    min-height: 100vh ;
+    width: 100%;
+}
+
+.form-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.label-container {
+    flex: 1;
+}
+
+.input-container {
+    flex: 2;
+}
+
+@media(max-width: 767px){
+    #side_nav{
+        margin-left: -300px;
+        position: fixed;
+        min-height: 100vh;
+        z-index: 1;
+    }
+
+    #side_nav.active{
+        margin-left: 0;
+    }
+}
