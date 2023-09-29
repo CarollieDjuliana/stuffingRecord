@@ -38,6 +38,10 @@ class Pages extends BaseController
     {
         return view('pages\showData');
     }
+    public function uploadImage()
+    {
+        return view('pages\uploadImage');
+    }
     public function test()
     {
         return view('pages\test');

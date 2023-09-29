@@ -2,18 +2,33 @@
 
 <?= $this->section('content'); ?>
 
-<body>
+<!-- Tabel Bootstrap untuk Menampilkan Data -->
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Term</th>
+                <th>Comodity</th>
+                <th>Quantity</th>
+                <th>Grade</th>
+                <th>Shipping Line</th>
+                <th>Vessel Name</th>
+                <th>Voyage</th>
+                <th>Port of Loading</th>
+                <th>Destination</th>
+                <th>E.T.D</th>
+                <th>Stuffing Place</th>
+                <th>Stuffing By</th>
+                <th>Location</th>
+                <th>Weather</th>
+                <!-- ... (kolom lainnya) ... -->
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+            <!-- Data akan ditampilkan di sini -->
+        </tbody>
+    </table>
+</div>
 
-    <ul class="nav nav-pills justify-content-end mt-3">
-        <li class="nav-item ">
-            <button type="button" class="btn btn-primary btn-lg ps-5 px-5 "> Print <i class="fa-solid fa-print"></i> </button>
-        </li>
-        <li class="nav-item">
-            <button type="button" class="btn btn-outline-warning btn-lg mx-5">Edit </button>
-        </li>
-    </ul>
-
-
-</body>
-
+<script type="module" src="<?= base_url('/assets/js/showData.js'); ?>"></script>
 <?= $this->endSection(); ?>

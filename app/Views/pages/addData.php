@@ -1,37 +1,75 @@
+<!-- Tambahkan bagian HTML Anda di sini -->
 <?= $this->extend('/layout/template'); ?>
 
 <?= $this->section('content'); ?>
 
 <?php
-function form_foto($container_fill)
-
+function form_foto($container_fill, $index)
 {
-    echo '
+    $html = '
     <div class="row">
-        <div class="col">';
-    echo $container_fill;
-    echo '</div>
-    </div>
-    <div class="row m-3">
-        <!-- <div class="col"><input class="btn btn-light" type="button" value="upload"></div>
-        <div class="col"><input class="btn btn-light" type="button" value="Input"></div> -->
         <div class="col">
-            <button type="button" class="btn btn-light">Take Photo <i class="fas fa-camera"></i></button>
+            ' . $container_fill . '
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-light">Upload Photo <i class="fas fa-upload"></i></button>
-        </div>
-        <div class="col ">
-            <input class="btn btn-warning" type="button" value="save">
     </div>
-    </div>
-<!-- penampung result -->
-<div class="row">
 
-</div>
-    ';
+    <div class="row">
+        <div class="col">
+            <!-- Container untuk menampilkan preview foto yang akan diambil -->
+            <img id="imagePreview' . $index . '" src="" alt="Preview" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+
+    <div class="row m-3">
+        <div class="col">
+            <button id="openCameraButton' . $index . '" class="btn btn-primary">Open Camera</button>
+        </div>
+        <div class="col">
+            <input type="file" id="fileInput' . $index . '" class="btn btn-light" accept="image/*">Select Image <i class="fas fa-upload"></i></input>
+        </div>
+        <div class="col">
+            <!-- Tombol untuk Upload Gambar -->
+            <button id="uploadButton' . $index . '" class="btn btn-success">Upload Image</button>
+        </div>
+    </div>
+    <!-- penampung result -->
+    <div class="row">
+        <div class="col">
+            <div class="image-container">
+                <!-- Tampilkan Gambar yang Diambil -->
+                <img id="capturedImage' . $index . '" style="display: none;" alt="Captured Image">
+                <img id="selectedImage' . $index . '" style="display: none;" alt="Selected Image">
+                <img id="uploadedImage' . $index . '" style="display: none;" alt="Uploaded Image">
+            </div>
+        </div>
+    </div>
+    <!-- penampung result -->
+    <div class="row"></div>';
+
+    return $html;
 }
 ?>
+
+<!-- Modal untuk Menampilkan Kamera -->
+<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cameraModalLabel">Camera View</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="cameraView" autoplay></video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="captureButton" class="btn btn-primary">Capture Image</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- page -->
 <div class="container">
@@ -54,71 +92,41 @@ function form_foto($container_fill)
                         <tr>
                             <td>STUFFING DATE </td>
                             <td>:</td>
-                            <td>25TH AGUSTUS 2022</td>
+                            <td>25TH AUGUST 2022</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col">
-                <!-- toogle sidebar -->
+                <!-- toggle sidebar -->
                 <button class="btn btn-primary mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Choose Container</button>
             </div>
         </div>
         <hr>
     </div>
 
-    <div class="content-undder">
+    <div class="content-under">
         <!-- form take picture -->
         <div class="row">
-            <?php form_foto("EMPTY CONTAINER") ?>
-
-            <!-- penampung result -->
-            <div class="row">
-                <button type="button" id="upload_empty_container" class="btn btn-light">Upload Photo <i class="fas fa-upload"></i></button>
-
-            </div>
+            <?= form_foto("EMPTY CONTAINER", 0); ?>
         </div>
         <div class="row">
-            <?php form_foto("1/4 FILL CONTAINER ") ?>
-            <!-- penampung result -->
-            <div class="row">
-
-            </div>
+            <?= form_foto("1/4 FILL CONTAINER ", 1); ?>
         </div>
         <div class="row">
-            <?php form_foto("1/2 FILL CONTAINER ") ?>
-            <!-- penampung result -->
-            <div class="row">
-
-            </div>
+            <?= form_foto("1/2 FILL CONTAINER ", 2); ?>
         </div>
         <div class="row">
-            <?php form_foto("CONTAINER FULL") ?>
-            <!-- penampung result -->
-            <div class="row">
-
-            </div>
+            <?= form_foto("CONTAINER FULL", 3); ?>
         </div>
         <div class="row">
-            <?php form_foto("CONTAINER CLOSED") ?>
-            <!-- penampung result -->
-            <div class="row">
-
-            </div>
+            <?= form_foto("CONTAINER CLOSED", 4); ?>
         </div>
         <div class="row">
-            <?php form_foto("CONTAINER SEGEL") ?>
-            <!-- penampung result -->
-            <div class="row">
-
-            </div>
+            <?= form_foto("CONTAINER SEGEL", 5); ?>
         </div>
-
     </div>
 </div>
-
-</div>
-
 
 <!-- sidebar -->
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -138,6 +146,12 @@ function form_foto($container_fill)
     </div>
 </div>
 
+<!-- Sertakan Bootstrap JS (wajib) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- Sertakan Firebase Konfigurasi dan Kode JavaScript -->
+<script type="module" src="<?= base_url('/assets/js/uploadImage.js'); ?>"></script>
 
 <?= $this->endSection(); ?>

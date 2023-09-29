@@ -1,157 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- Bootstrap theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>How to create Firebase login and register?</title>
+    <title>Webcam Capture and Upload</title>
+    <!-- Sertakan Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
+    <!-- Tombol untuk Membuka Popup Kamera -->
+    <button id="openCameraButton" class="btn btn-primary">Open Camera</button>
 
-    <div class="navbar navbar-default">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="https://www.shinerweb.com">Shinerweb Technologies</a>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
-            </ul>
+    <!-- Modal untuk Menampilkan Kamera -->
+    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cameraModalLabel">Camera View</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <video id="cameraView" autoplay></video>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="captureButton" class="btn btn-primary">Capture Image</button>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
-    <div class="container">
 
-        <div class="col-sm-4">
-            <img src="firebase_auth.png">
-        </div>
-        <form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" name="login_email" id="login_email" class="form-control" placeholder="Enter your email">
-                </div>
+    <!-- Tampilkan Gambar yang Diambil -->
+    <img id="capturedImage" style="display: none;" alt="Captured Image">
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="login_password" id="login_password" class="form-control" placeholder="Enter your password">
-                </div>
-                <button type="button" id="login" name="login" class="btn btn-success">Login</button>
-            </div><!-- end col -->
+    <!-- Tombol untuk Upload Gambar -->
+    <input type="file" id="fileInput" accept="image/*">
+    <button id="uploadButton" class="btn btn-success">Upload Image</button>
 
-    </div><!--  end row -->
-    </form>
-    </div>
-    <br>
-    <center>Developed by <a href="https://shinerweb.com/">Shinerweb</a></center>
-</body>
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import {
-        initializeApp
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-    import {
-        getAnalytics
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
-    import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        signOut
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    <!-- Sertakan Bootstrap JS (wajib) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
-        authDomain: "stuffingrecord-mkj.firebaseapp.com",
-        databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "stuffingrecord-mkj",
-        storageBucket: "stuffingrecord-mkj.appspot.com",
-        messagingSenderId: "515562362541",
-        appId: "1:515562362541:web:f692bb65ef317963765824",
-        measurementId: "G-4GEZPYYPS5"
+    <!-- Sertakan Firebase Konfigurasi dan Kode -->
+    <script type="module">
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import {
+            getStorage,
+            ref,
+            uploadBytes
+        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
-    };
+        // Inisialisasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
+            authDomain: "stuffingrecord-mkj.firebaseapp.com",
+            databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "stuffingrecord-mkj",
+            storageBucket: "stuffingrecord-mkj.appspot.com",
+            messagingSenderId: "515562362541",
+            appId: "1:515562362541:web:f692bb65ef317963765824",
+            measurementId: "G-4GEZPYYPS5"
+        };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const auth = getAuth();
-    console.log(app);
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        let capturedImageData = null;
+        let stream = null; // Untuk menyimpan referensi stream webcam
 
+        // Fungsi untuk mengambil gambar dari webcam
+        function captureImage() {
+            const video = document.getElementById('cameraView');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const capturedImage = document.getElementById('capturedImage');
 
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    //----- New Registration code start	  
-    document.getElementById("register").addEventListener("click", function() {
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
-        //For new registration
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                alert("Registration successfully!!");
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
-                console.log(errorMessage);
-                alert(error);
-            });
-    });
-    //----- End
+            // Menampilkan gambar yang diambil di elemen <img>
+            capturedImage.src = canvas.toDataURL('image/jpeg');
+            capturedImage.style.display = 'block';
 
-    //----- Login code start	  
-    document.getElementById("login").addEventListener("click", function() {
-        var email = document.getElementById("login_email").value;
-        var password = document.getElementById("login_password").value;
+            // Simpan data gambar yang diambil untuk mengunggahnya nanti
+            capturedImageData = canvas.toDataURL('image/jpeg');
+        }
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                alert(user.email + " Login successfully!!!");
-                document.getElementById('logout').style.display = 'block';
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                alert(errorMessage);
-            });
-    });
-    //----- End
+        // Event listener untuk tombol Open Camera
+        document.getElementById('openCameraButton').addEventListener('click', () => {
+            const video = document.getElementById('cameraView');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
 
-    //----- Logout code start	  
-    document.getElementById("logout").addEventListener("click", function() {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            console.log('Sign-out successful.');
-            alert('Sign-out successful.');
-            document.getElementById('logout').style.display = 'none';
-        }).catch((error) => {
-            // An error happened.
-            console.log('An error happened.');
+            navigator.mediaDevices.getUserMedia({
+                    video: true
+                })
+                .then((streamData) => {
+                    stream = streamData;
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch((error) => {
+                    console.error('Error accessing webcam: ', error);
+                });
+
+            $('#cameraModal').modal('show'); // Tampilkan modal
         });
-    });
-    //----- End
-</script>
+
+        // Event listener untuk tombol Capture Image
+        document.getElementById('captureButton').addEventListener('click', () => {
+            captureImage();
+            $('#cameraModal').modal('hide'); // Tutup modal ketika capture
+        });
+
+        // Event listener untuk tombol Upload Gambar
+        document.getElementById('uploadButton').addEventListener('click', () => {
+            const fileInput = document.getElementById('fileInput');
+            const selectedFile = fileInput.files[0];
+
+            if (selectedFile || capturedImageData) {
+                const imageToUpload = selectedFile ? selectedFile : dataURItoBlob(capturedImageData);
+
+                // Definisikan path penyimpanan di Firebase Storage
+                const storageRef = ref(storage, 'images/' + (selectedFile ? selectedFile.name : 'captured-image-' + Date.now() + '.jpg'));
+
+                // Lakukan upload gambar
+                const uploadTask = uploadBytes(storageRef, imageToUpload, {
+                    contentType: 'image/jpeg'
+                });
+
+                uploadTask.then((snapshot) => {
+                    console.log('Gambar berhasil diupload.');
+                    // Reset gambar yang ditampilkan
+                    document.getElementById('capturedImage').style.display = 'none';
+                    fileInput.value = '';
+
+                    // Tutup modal
+                    $('#cameraModal').modal('hide');
+
+                    // Hentikan akses webcam
+                    if (stream) {
+                        stream.getTracks().forEach((track) => {
+                            track.stop();
+                        });
+                    }
+                }).catch((error) => {
+                    console.error('Error saat mengupload gambar:', error);
+                });
+            } else {
+                console.log('Pilih file gambar atau ambil gambar terlebih dahulu.');
+            }
+        });
+
+        // Konversi data URI ke Blob
+        function dataURItoBlob(dataURI) {
+            const byteString = atob(dataURI.split(',')[1]);
+            const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], {
+                type: mimeString
+            });
+        }
+    </script>
+</body>
 
 </html>

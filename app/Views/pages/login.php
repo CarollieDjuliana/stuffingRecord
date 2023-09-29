@@ -12,7 +12,20 @@
 </head>
 <style>
     .bg-custom {
-        background-color: #E5D758;
+        background-color: #fdb913;
+    }
+
+    body {
+
+        /* Gunakan URL gambar sebagai nilai background-image */
+        background-image: url("assets/images/SI_background.jpg");
+        /* Properti CSS lainnya untuk mengatur latar belakang */
+        background-size: cover;
+        /* Sesuaikan gambar agar mengisi seluruh area */
+        background-repeat: no-repeat;
+        /* Hindari pengulangan gambar */
+        background-attachment: fixed;
+        /* Gambar tetap saat menggulir halaman */
     }
 </style>
 
@@ -20,7 +33,7 @@
     <nav class="navbar navbar-expand-lg bg-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="/assets/images/logo.png" alt="Logo" width="25%" height="25%" class="d-inline-block align-text-top">
+                <img src="/assets/images/logo.png" alt="Logo" width="35%" height="35%" class="d-inline-block align-text-top">
             </a>
         </div>
     </nav>
@@ -29,7 +42,7 @@
         <!-- button back -->
         <!-- <button type="button" class="btn m-2"> <i class="fa-regular fa-circle-left"></i> Back</script></button> -->
         <!-- form login -->
-        <div class="d-flex justify-content-center align-items-center m-3">
+        <div class="d-flex justify-content-center align-items-center m-3 mt-5 ">
             <div class="card mb-3 p-md-3" style="width: 36rem;">
                 <div class="card-body">
                     <h3 class="card-title text-center ">STUFFING RECORD <br>PT. MUSI KALIJAYA</h3>
@@ -65,90 +78,11 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<script type="module" src="<?php echo base_url('/assets/js/firebase-config.js'); ?>">
-</script>
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import {
-        initializeApp
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-    import {
-        getAnalytics
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
-    import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        signOut
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+<!-- <script type="module" src="<?php echo base_url('/assets/js/firebase-config.js'); ?>"></script>
+<script type="module" src="<?php echo base_url('/assets/js/login.js'); ?>"></script> -->
+<!-- <script type="module" src="./firebase-config.js"></script>
+<script src="./login.js"></script> -->
 
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+<!-- <script type="module" src="<?= base_url('/assets/js/fireConfig.js'); ?>"></script> -->
 
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-        apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
-        authDomain: "stuffingrecord-mkj.firebaseapp.com",
-        databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "stuffingrecord-mkj",
-        storageBucket: "stuffingrecord-mkj.appspot.com",
-        messagingSenderId: "515562362541",
-        appId: "1:515562362541:web:f692bb65ef317963765824",
-        measurementId: "G-4GEZPYYPS5"
-
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const auth = getAuth();
-    console.log(app);
-
-
-
-    //----- New Registration code start	  
-
-
-    //----- Login code start
-    document.getElementById("login").addEventListener("click", function() {
-        var email = document.getElementById("login_email").value;
-        var password = document.getElementById("login_password").value;
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                alert(user.email + " Login successfully!!!");
-                // document.getElementById('logout').style.display = 'block';
-                window.location.href = '<?php echo base_url('/dashboard'); ?>';
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                alert(errorMessage);
-            });
-    });
-    //----- End
-
-    //----- Logout code start
-    document.getElementById("logout").addEventListener("click", function() {
-        signOut(auth).then(() => {
-            // Sign-out successful.
-            console.log('Sign-out successful.');
-            alert('Sign-out successful.');
-            document.getElementById('logout').style.display = 'none';
-        }).catch((error) => {
-            // An error happened.
-            console.log('An error happened.');
-        });
-    });
-    //----- End
-</script>
-
-<!-- <script src="<?php echo base_url('/assets/js/firebase-config.js'); ?>"></script> -->
-
-</html>
+<script type="module" src="<?= base_url('/assets/js/login.js'); ?>"></script>

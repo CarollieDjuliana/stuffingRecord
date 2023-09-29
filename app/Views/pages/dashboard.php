@@ -5,9 +5,9 @@
 <body>
     <div class="container-fluid p-3">
         <!-- title -->
-        <h5 class="p-3">STUFFING RECORD MUSI KALIJAYA</h5>
+        <h5 class="text-lg, p-3">STUFFING RECORD MUSI KALIJAYA</h5>
         <!-- add activity button -->
-        <div class="px-5">
+        <div class=" text-md p-5">
             <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end p-3" onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
         </div>
         <!-- search bar -->
@@ -20,7 +20,7 @@
             </button>
         </div>
         <!-- record tabel -->
-        <table class="table">
+        <table class="table container-fluid table-responsive" style="max-width: 100%; width: 100%;">
             <thead>
                 <tr>
                     <th scope="col">DATE</th>
@@ -32,52 +32,15 @@
                     <th scope="col">SHOW DATA</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>28/08/2023</td>
-                    <td>PT. Badja Baru</td>
-                    <td>98084140</td>
-                    <td>UTPK</td>
-                    <td>CLOSED</td>
-                    <td><button type="button" class="btn btn-primary">Primary</button></td>
-                    <td><button type="button" class="btn btn-warning">Warning</button></td>
-                </tr>
-                <tr>
-                    <td>28/08/2023</td>
-                    <td>PT. Badja Baru</td>
-                    <td>98084140</td>
-                    <td>UTPK</td>
-                    <td>CLOSED</td>
-                    <td><button type="button" class="btn btn-primary">Primary</button></td>
-                    <td><button type="button" class="btn btn-warning">Warning</button></td>
-                </tr>
-                <tr>
-                    <td>28/08/2023</td>
-                    <td>PT. Badja Baru</td>
-                    <td>98084140</td>
-                    <td>UTPK</td>
-                    <td>CLOSED</td>
-                    <td><button type="button" class="btn btn-primary">Primary</button></td>
-                    <td><button type="button" class="btn btn-warning">Warning</button></td>
-                </tr>
+            <tbody id="data-table-body">
+
             </tbody>
         </table>
     </div>
 
 </body>
+<script type="module" src="<?= base_url('/assets/js/dashboard.js'); ?>"></script>
 
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    // ...
-
-    // Fungsi untuk mengarahkan ke halaman "addActivity"
-    function redirectToAddActivity() {
-        // Ganti dengan URL halaman "addActivity" Anda
-        window.location.href = '/addActivity';
-    }
-
-    // ...
-</script>
 
 <!-- <script type="module">
     // Import the functions you need from the SDKs you need

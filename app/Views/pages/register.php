@@ -62,7 +62,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
-    <!-- <script type="module" src="<?php echo base_url('/assets/js/firebase-config.js'); ?>"></script> -->
+    <!-- <script type="module" src="<?= base_url('/assets/js/fireConfig.js'); ?>"></script>
+
+    <script type="module" src="<?= base_url('/assets/js/register.js'); ?>"></script> -->
 
     <script type="module">
         // Import the functions you need from the SDKs you need
