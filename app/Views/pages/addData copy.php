@@ -1,25 +1,47 @@
+<!-- Tambahkan bagian HTML Anda di sini -->
 <?= $this->extend('/layout/template'); ?>
 
 <?= $this->section('content'); ?>
 
 <?php
-function form_foto($container_fill)
+function form_foto($container_fill, $index)
 {
     $html = '
     <div class="row">
-        <div class="col">';
-    $html .= $container_fill;
-    $html .= '</div>
+        <div class="col">
+            ' . $container_fill . '
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <!-- Container untuk menampilkan preview foto yang akan diambil -->
+            <img id="imagePreview' . $index . '" src="" alt="Preview" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+
     <div class="row m-3">
         <div class="col">
-            <input type="file" id="' . $container_fill . '" class="btn btn-light" accept="image/*">Capture Image <i class="fas fa-camera"></i></input>
+            <button id="openCameraButton' . $index . '" class="btn btn-primary" data-index="' . $index . '">Open Camera</button>
         </div>
         <div class="col">
-            <input type="file" id="' . $container_fill . '" class="btn btn-light" accept="image/*">Select Image <i class="fas fa-upload"></i></input>
+            <input type="file" id="fileInput' . $index . '" class="btn btn-light" accept="image/*" data-index="' . $index . '">Select Image <i class="fas fa-upload"></i></input>
         </div>
         <div class="col">
-            <button class="btn btn-warning" id="uploadButton">Upload Gambar</button>
+            <!-- Tombol untuk Upload Gambar -->
+            <button id="uploadButton' . $index . '" class="btn btn-success" data-index="' . $index . '">Upload Image</button>
+        </div>
+    </div>
+    <!-- penampung result -->
+    <div class="row">
+        <div class="col">
+            <div class="image-container">
+                <!-- Tampilkan Gambar yang Diambil -->
+                <img id="capturedImage' . $index . '" style="display: none;" alt="Captured Image">
+                <img id="selectedImage' . $index . '" style="display: none;" alt="Selected Image">
+                <img id="uploadedImage' . $index . '" style="display: none;" alt="Uploaded Image">
+                <p id="uploadedText' . $index . '" style="display: none;">Uploaded <i class="fa-solid fa-circle-check" style="color: #34b233;"></i></p>
+            </div>
         </div>
     </div>
     <!-- penampung result -->
@@ -29,6 +51,26 @@ function form_foto($container_fill)
 }
 ?>
 
+<!-- Modal untuk Menampilkan Kamera -->
+<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true" data-index="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cameraModalLabel">Camera View</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <video id="cameraView" autoplay data-index="-1"></video>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="captureButton" class="btn btn-primary" data-index="-1">Capture Image</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- page -->
 <div class="container">
@@ -67,26 +109,24 @@ function form_foto($container_fill)
     <div class="content-under">
         <!-- form take picture -->
         <div class="row">
-            <?php echo form_foto("EMPTY CONTAINER"); ?>
+            <?= form_foto("EMPTY CONTAINER", 0); ?>
         </div>
         <div class="row">
-            <?php echo form_foto("1/4 FILL CONTAINER "); ?>
+            <?= form_foto("1/4 FILL CONTAINER ", 1); ?>
         </div>
         <div class="row">
-            <?php echo form_foto("1/2 FILL CONTAINER "); ?>
+            <?= form_foto("1/2 FILL CONTAINER ", 2); ?>
         </div>
         <div class="row">
-            <?php echo form_foto("CONTAINER FULL"); ?>
+            <?= form_foto("CONTAINER FULL", 3); ?>
         </div>
         <div class="row">
-            <?php echo form_foto("CONTAINER CLOSED"); ?>
+            <?= form_foto("CONTAINER CLOSED", 4); ?>
         </div>
         <div class="row">
-            <?php echo form_foto("CONTAINER SEGEL"); ?>
+            <?= form_foto("CONTAINER SEGEL", 5); ?>
         </div>
     </div>
-</div>
-
 </div>
 
 <!-- sidebar -->
@@ -106,5 +146,13 @@ function form_foto($container_fill)
         </div>
     </div>
 </div>
+
+<!-- Sertakan Bootstrap JS (wajib) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Sertakan Firebase Konfigurasi dan Kode JavaScript -->
 <script type="module" src="<?= base_url('/assets/js/uploadImage.js'); ?>"></script>
+
 <?= $this->endSection(); ?>

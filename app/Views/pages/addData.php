@@ -22,14 +22,14 @@ function form_foto($container_fill, $index)
 
     <div class="row m-3">
         <div class="col">
-            <button id="openCameraButton' . $index . '" class="btn btn-primary">Open Camera</button>
+            <button id="openCameraButton' . $index . '" class="btn btn-primary" data-index="' . $index . '">Open Camera</button>
         </div>
         <div class="col">
-            <input type="file" id="fileInput' . $index . '" class="btn btn-light" accept="image/*">Select Image <i class="fas fa-upload"></i></input>
+            <input type="file" id="fileInput' . $index . '" class="btn btn-light" accept="image/*" data-index="' . $index . '">Select Image <i class="fas fa-upload"></i></input>
         </div>
         <div class="col">
             <!-- Tombol untuk Upload Gambar -->
-            <button id="uploadButton' . $index . '" class="btn btn-success">Upload Image</button>
+            <button id="uploadButton' . $index . '" class="btn btn-success" data-index="' . $index . '">Upload Image</button>
         </div>
     </div>
     <!-- penampung result -->
@@ -40,6 +40,7 @@ function form_foto($container_fill, $index)
                 <img id="capturedImage' . $index . '" style="display: none;" alt="Captured Image">
                 <img id="selectedImage' . $index . '" style="display: none;" alt="Selected Image">
                 <img id="uploadedImage' . $index . '" style="display: none;" alt="Uploaded Image">
+                <p id="uploadedText' . $index . '" style="display: none;">Uploaded <i class="fa-solid fa-circle-check" style="color: #34b233;"></i></p>
             </div>
         </div>
     </div>
@@ -51,7 +52,7 @@ function form_foto($container_fill, $index)
 ?>
 
 <!-- Modal untuk Menampilkan Kamera -->
-<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true">
+<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true" data-index="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,11 +62,11 @@ function form_foto($container_fill, $index)
                 </button>
             </div>
             <div class="modal-body">
-                <video id="cameraView" autoplay></video>
+                <video id="cameraView" autoplay data-index="-1"></video>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="captureButton" class="btn btn-primary">Capture Image</button>
+                <button id="captureButton" class="btn btn-primary" data-index="-1">Capture Image</button>
             </div>
         </div>
     </div>

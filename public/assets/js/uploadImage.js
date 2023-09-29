@@ -1,3 +1,4 @@
+// Tambahkan kode JavaScript Anda di sini
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
 
@@ -53,6 +54,8 @@ function captureImage(index, video) {
 document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) => {
     button.addEventListener('click', () => {
         const video = document.getElementById('cameraView');
+        video.dataset.index = button.getAttribute('data-index'); // Set indeks form yang aktif
+
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
@@ -64,17 +67,19 @@ document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) =>
             video.play();
 
             $('#cameraModal').modal('show'); // Tampilkan modal
-
-            // Event listener untuk tombol Capture Image
-            document.getElementById('captureButton').addEventListener('click', () => {
-                captureImage(index, video);
-                $('#cameraModal').modal('hide'); // Tutup modal ketika capture
-            });
         })
         .catch((error) => {
             console.error('Error accessing webcam: ', error);
         });
     });
+});
+
+// Event listener untuk tombol Capture Image
+document.getElementById('captureButton').addEventListener('click', () => {
+    const index = document.getElementById('cameraView').getAttribute('data-index'); // Ambil indeks form yang aktif
+    const video = document.getElementById('cameraView');
+    captureImage(index, video);
+    $('#cameraModal').modal('hide'); // Tutup modal ketika capture
 });
 
 // Event listener untuk input file
@@ -128,15 +133,30 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
     uploadButton.addEventListener('click', () => {
         const fileInput = document.getElementById('fileInput' + index);
         const selectedFile = fileInput.files[0];
+        const capturedImage = document.getElementById('capturedImage' + index);
+        const selectedImage = document.getElementById('selectedImage' + index);
+        const uploadedImage = document.getElementById('uploadedImage' + index);
+        const uploadedText = document.getElementById('uploadedText' + index);
 
+        let fileToUpload;
+
+        // Memilih file yang akan di-upload (selectedFile atau yang di-capture)
         if (selectedFile) {
+            fileToUpload = selectedFile;
+        } else {
+            const dataURL = capturedImage.src;
+            const blob = dataURItoBlob(dataURL);
+            fileToUpload = new File([blob], 'captured-image.jpg');
+        }
+
+        if (fileToUpload) {
             const imageName = 'captured-image-' + Date.now() + '-' + index + '.jpg';
 
             // Definisikan path penyimpanan di Firebase Storage
             const storageRef = ref(storage, 'images/' + imageName);
 
             // Lakukan upload gambar
-            const uploadTask = uploadBytes(storageRef, selectedFile, {
+            const uploadTask = uploadBytes(storageRef, fileToUpload, {
                 contentType: 'image/jpeg'
             });
 
@@ -145,17 +165,21 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
                 console.log('Gambar berhasil diupload untuk form ' + index);
 
                 // Reset gambar yang ditampilkan
-                document.getElementById('capturedImage' + index).style.display = 'none';
+                capturedImage.style.display = 'none';
+                selectedImage.style.display = 'none';
+                uploadedImage.style.display = 'block'; // Tampilkan gambar yang diunggah
+                uploadedText.style.display = 'block'; // Tampilkan teks "Uploaded"
                 fileInput.type = 'text'; // Reset input file
                 fileInput.type = 'file'; // Kembalikan tipe ke file
+
+                // Ubah ukuran gambar yang diunggah (misalnya, lebarnya menjadi 100 piksel)
+                uploadedImage.style.maxWidth = '250px'; // Sesuaikan ukuran sesuai kebutuhan
 
                 // Ambil URL gambar dari Firebase Storage
                 getDownloadURL(ref(storage, 'images/' + imageName))
                     .then((url) => {
                         // Tampilkan gambar yang diupload di tempat preview
-                        const uploadedImage = document.getElementById('uploadedImage' + index);
                         uploadedImage.src = url;
-                        uploadedImage.style.display = 'block';
                     })
                     .catch((error) => {
                         console.error('Error saat mengambil URL gambar:', error);
@@ -172,6 +196,7 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
         }
     });
 });
+
 
 // Konversi data URI ke Blob
 function dataURItoBlob(dataURI) {
