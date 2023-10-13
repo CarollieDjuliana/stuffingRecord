@@ -4,60 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webcam Capture and Upload</title>
-    <!-- Sertakan Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>CRUD App</title>
 </head>
 
 <body>
-    <!-- Tombol untuk Membuka Popup Kamera -->
-    <button id="openCameraButton" class="btn btn-primary">Open Camera</button>
+    <h1>Data Detail</h1>
+    <div id="data-container">
+        <p>No Booking: <span id="no_booking"></span></p>
+        <p>Shipper: <span id="shipper"></span></p>
+        <p>Term: <span id="term"></span></p>
+        <p>Comodity: <span id="comodity"></span></p>
+        <p>Quantity: <span id="quantity"></span></p>
+        <p>Grade: <span id="grade"></span></p>
+        <p>Shipping Line: <span id="shipping_line"></span></p>
+        <p>Vessel Name: <span id="vessel_name"></span></p>
+        <p>Voyage: <span id="voyage"></span></p>
+        <p>Port of Loading: <span id="port_of_loading"></span></p>
+        <p>Destination: <span id="destination"></span></p>
+        <p>ETD: <span id="etd"></span></p>
+        <p>Stuffing Place: <span id="stuffing_place"></span></p>
+        <p>Stuffing By: <span id="stuffing_by"></span></p>
+        <p>Location: <span id="location"></span></p>
+        <p>Weather: <span id="weather"></span></p>
 
-    <!-- Modal untuk Menampilkan Kamera -->
-    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cameraModalLabel">Camera View</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <video id="cameraView" autoplay></video>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="captureButton" class="btn btn-primary">Capture Image</button>
-                </div>
-            </div>
+        <div id="container-data">
+            <!-- Kontainer untuk data container -->
         </div>
     </div>
+    <button id="edit-button">Edit Data</button>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 
-    <!-- Tampilkan Gambar yang Diambil -->
-    <img id="capturedImage" style="display: none;" alt="Captured Image">
 
-    <!-- Tombol untuk Upload Gambar -->
-    <input type="file" id="fileInput" accept="image/*">
-    <button id="uploadButton" class="btn btn-success">Upload Image</button>
-
-    <!-- Sertakan Bootstrap JS (wajib) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Sertakan Firebase Konfigurasi dan Kode -->
     <script type="module">
         import {
             initializeApp
         } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
         import {
-            getStorage,
+            getDatabase,
             ref,
-            uploadBytes
-        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+            get
+        } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 
-        // Inisialisasi Firebase
+        // Konfigurasi Firebase SDK
         const firebaseConfig = {
             apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
             authDomain: "stuffingrecord-mkj.firebaseapp.com",
@@ -70,108 +59,64 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const storage = getStorage(app);
-        let capturedImageData = null;
-        let stream = null; // Untuk menyimpan referensi stream webcam
+        const db = getDatabase(app);
 
-        // Fungsi untuk mengambil gambar dari webcam
-        function captureImage() {
-            const video = document.getElementById('cameraView');
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            const capturedImage = document.getElementById('capturedImage');
 
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const shipper = "test7";
+        const no_booking = "test7";
 
-            // Menampilkan gambar yang diambil di elemen <img>
-            capturedImage.src = canvas.toDataURL('image/jpeg');
-            capturedImage.style.display = 'block';
+        const dataPath = "activity/" + shipper + "/" + no_booking;
+        const dataRef = ref(db, dataPath);
 
-            // Simpan data gambar yang diambil untuk mengunggahnya nanti
-            capturedImageData = canvas.toDataURL('image/jpeg');
-        }
+        // Membaca data dari Firebase
+        function loadData() {
+            get(dataRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
 
-        // Event listener untuk tombol Open Camera
-        document.getElementById('openCameraButton').addEventListener('click', () => {
-            const video = document.getElementById('cameraView');
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
+                    // Mengisi data ke elemen HTML
+                    document.getElementById("no_booking").textContent = data.no_booking;
+                    document.getElementById("shipper").textContent = data.shipper;
+                    document.getElementById("term").textContent = data.term;
+                    document.getElementById("comodity").textContent = data.comodity;
+                    document.getElementById("quantity").textContent = data.quantity;
+                    document.getElementById("grade").textContent = data.grade;
+                    document.getElementById("shipping_line").textContent = data.shipping_line;
+                    document.getElementById("vessel_name").textContent = data.vessel_name;
+                    document.getElementById("voyage").textContent = data.voyage;
+                    document.getElementById("port_of_loading").textContent = data.port_of_loading;
+                    document.getElementById("destination").textContent = data.destination;
+                    document.getElementById("etd").textContent = data.etd;
+                    document.getElementById("stuffing_place").textContent = data.stuffing_place;
+                    document.getElementById("stuffing_by").textContent = data.stuffing_by;
+                    document.getElementById("location").textContent = data.location;
+                    document.getElementById("weather").textContent = data.weather;
 
-            navigator.mediaDevices.getUserMedia({
-                    video: true
-                })
-                .then((streamData) => {
-                    stream = streamData;
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch((error) => {
-                    console.error('Error accessing webcam: ', error);
-                });
+                    const containerData = data.container_data;
 
-            $('#cameraModal').modal('show'); // Tampilkan modal
-        });
+                    // Menggunakan containerData untuk menyusun HTML untuk data container
+                    const containerDataHtml = Object.entries(containerData).map(([containerNumber, container]) => {
+                        return `
+                            <p>Container Number: ${containerNumber}</p>
+                            <p>Seal Number: ${container.seal_number}</p>
+                            <p>Stuffing Date: ${container.stuffing_date}</p>
+                            <!-- Tambahkan elemen HTML lainnya sesuai dengan data container -->
+                        `;
+                    }).join('');
 
-        // Event listener untuk tombol Capture Image
-        document.getElementById('captureButton').addEventListener('click', () => {
-            captureImage();
-            $('#cameraModal').modal('hide'); // Tutup modal ketika capture
-        });
-
-        // Event listener untuk tombol Upload Gambar
-        document.getElementById('uploadButton').addEventListener('click', () => {
-            const fileInput = document.getElementById('fileInput');
-            const selectedFile = fileInput.files[0];
-
-            if (selectedFile || capturedImageData) {
-                const imageToUpload = selectedFile ? selectedFile : dataURItoBlob(capturedImageData);
-
-                // Definisikan path penyimpanan di Firebase Storage
-                const storageRef = ref(storage, 'images/' + (selectedFile ? selectedFile.name : 'captured-image-' + Date.now() + '.jpg'));
-
-                // Lakukan upload gambar
-                const uploadTask = uploadBytes(storageRef, imageToUpload, {
-                    contentType: 'image/jpeg'
-                });
-
-                uploadTask.then((snapshot) => {
-                    console.log('Gambar berhasil diupload.');
-                    // Reset gambar yang ditampilkan
-                    document.getElementById('capturedImage').style.display = 'none';
-                    fileInput.value = '';
-
-                    // Tutup modal
-                    $('#cameraModal').modal('hide');
-
-                    // Hentikan akses webcam
-                    if (stream) {
-                        stream.getTracks().forEach((track) => {
-                            track.stop();
-                        });
-                    }
-                }).catch((error) => {
-                    console.error('Error saat mengupload gambar:', error);
-                });
-            } else {
-                console.log('Pilih file gambar atau ambil gambar terlebih dahulu.');
-            }
-        });
-
-        // Konversi data URI ke Blob
-        function dataURItoBlob(dataURI) {
-            const byteString = atob(dataURI.split(',')[1]);
-            const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-            const ab = new ArrayBuffer(byteString.length);
-            const ia = new Uint8Array(ab);
-            for (let i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-            return new Blob([ab], {
-                type: mimeString
+                    // Memasukkan data container ke dalam elemen HTML
+                    document.getElementById("container-data").innerHTML = containerDataHtml;
+                }
             });
         }
+
+        loadData(); // Memuat data saat halaman dimuat
+
+        // Menambahkan event listener untuk tombol Edit
+        document.getElementById("edit-button").addEventListener("click", () => {
+            // Redirect ke halaman edit data
+            window.location.href = "test2?shipper=" + shipper + "&no_booking=" + no_booking;
+        });
     </script>
 </body>
 

@@ -42,8 +42,25 @@ class Pages extends BaseController
     {
         return view('pages\uploadImage');
     }
+    public function profile()
+    {
+        return view('pages\profile');
+    }
+    public function downloadPdf()
+    {
+        return view('pages\downloadPdf');
+    }
+    public function editData()
+    {
+        return view('pages\editData');
+    }
     public function test()
     {
         return view('pages\test');
+    }
+
+    public function test2()
+    {
+        return view('pages\test2');
     }
 }

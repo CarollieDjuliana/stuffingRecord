@@ -42,7 +42,7 @@
         <!-- button back -->
         <!-- <button type="button" class="btn m-2"> <i class="fa-regular fa-circle-left"></i> Back</script></button> -->
         <!-- form login -->
-        <div class="d-flex justify-content-center align-items-center m-3 mt-5 ">
+        <div class="d-flex justify-content-center align-items-center m-3 mt-5">
             <div class="card mb-3 p-md-3" style="width: 36rem;">
                 <div class="card-body">
                     <h3 class="card-title text-center ">STUFFING RECORD <br>PT. MUSI KALIJAYA</h3>

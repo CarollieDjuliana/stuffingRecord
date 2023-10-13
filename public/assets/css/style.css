@@ -1,42 +1,144 @@
-.bg-custom {
-    background-color: #fdb913;
+body{
+    background: #eee;
+    font-size: 14px;
+   }
+
+   .bg-custom{
+    background-color: #ffbc14;
+   }
+   
+   #side_nav {
+    min-width: 230px;
+    max-width: 230px;
+    transition: all 0.3s;
+    position: relative;
 }
 
-#side_nav{
-    background: #000000ca;
-    min-width: 300px;
-    max-width: 300px
-}
-
-.content{
-    min-height: 100vh ;
+#side_nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/SI_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.5); /* Nilai ini menggelapkan gambar */
+    z-index: -1; /* Mengatur lapisan gambar di bawah konten */
 }
 
-.form-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.btn-light {
+  background-color: white;
+  background-color: rgba(0, 0, 0, 0);
+  /* Nilai alpha di sini (0.5) mengatur transparansi */
+  color: white;
+  border: none;
+  margin: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.label-container {
-    flex: 1;
+.btn-light.active-button {
+  color: black;
+  background-color: whitesmoke;
 }
 
-.input-container {
-    flex: 2;
+   .content{
+      min-height: 100vh;
+      width: 100%;
+   }
+   hr.h-color{
+     background: #eee;
+   }
+   
+
+   .btn-light {
+    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
+    /* Nilai alpha di sini (0.5) mengatur transparansi */
+    color: white;
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    width: 80%; /* Tombol mengisi seluruh lebar sidebar */
+  text-align: left; /* Untuk menggeser teks ke kiri di dalam tombol */
+  padding: 10px 20px; /* Sesuaikan padding sesuai kebutuhan Anda */
 }
 
-@media(max-width: 767px){
+
+.btn-light.active-button {
+    color: black;
+    background-color: whitesmoke;
+}
+   /* Mengatur tabel agar berada di tengah */
+table {
+  margin: 0 auto; /* Mengatur margin kiri dan kanan menjadi otomatis, sehingga tabel akan berada di tengah */
+}
+
+/* Mengatur sel-sel tabel agar berada di tengah secara horizontal dan vertical */
+table td, table th {
+  text-align: center; /* Mengatur alignment horizontal ke tengah */
+  vertical-align: middle; /* Mengatur alignment vertical ke tengah */
+}
+
+footer {
+  background-color: #ffbc14;
+  text-align: center;
+  padding: 2 rem;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.main-container {
+  margin-bottom: 2rem;
+}
+   
+   @media(max-width: 767px){
     #side_nav{
-        margin-left: -300px;
-        position: fixed;
-        min-height: 100vh;
-        z-index: 1;
+      margin-left: -250px;
+      position: absolute;
+      min-height: 100vh;
+      z-index: 1;
+   
     }
-    
-
     #side_nav.active{
-        margin-left: 0;
+      margin-left: 0;
+     }
+   }
+
+   @media (min-width: 768px) {
+    table {
+        font-size: 16px; /* Ukuran font untuk desktop */
+    }
+    .btn {
+        font-size: 14px; /* Ukuran font tombol untuk desktop */
+    }
+}
+
+/* Aturan CSS untuk mode mobile (lebar layar <= 768px) */
+@media (max-width: 768px) {
+    table {
+        font-size: 12px; /* Ukuran font untuk mobile (ganti sesuai kebutuhan) */
+    }
+    .btn {
+        font-size: 10px; /* Ukuran font tombol untuk mobile (ganti sesuai kebutuhan) */
+    }
+    body {
+      font-size: 14px; /* Ukuran teks untuk layar kecil (misalnya, ponsel) */
     }
 }

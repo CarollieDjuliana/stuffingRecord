@@ -1,0 +1,121 @@
+body{
+    background: #eee;
+   }
+
+   .bg-custom{
+    background-color: #ffbc14;
+   }
+   
+   #side_nav {
+    min-width: 250px;
+    max-width: 250px;
+    transition: all 0.3s;
+    position: relative;
+}
+
+#side_nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/assets/images/SI_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.5); /* Nilai ini menggelapkan gambar */
+    z-index: -1; /* Mengatur lapisan gambar di bawah konten */
+}
+
+/* CSS untuk mengatur agar footer fixed */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  min-height: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+footer {
+  background-color: #ffbc14;
+  text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+
+   .content{
+      min-height: 100vh;
+      width: 100%;
+   }
+   hr.h-color{
+     background: #eee;
+   }
+   
+   .sidebar li.active{
+      background: #eee;
+      border-radius: 8px;
+   }
+
+   
+   .sidebar li.active a, .sidebar li.active a:hover {
+    color: #000;
+   }
+   .sidebar li a{
+    color: #fff;
+   }
+
+   /* Mengatur tabel agar berada di tengah */
+table {
+  margin: 0 auto; /* Mengatur margin kiri dan kanan menjadi otomatis, sehingga tabel akan berada di tengah */
+}
+
+/* Mengatur sel-sel tabel agar berada di tengah secara horizontal dan vertical */
+table td, table th {
+  text-align: center; /* Mengatur alignment horizontal ke tengah */
+  vertical-align: middle; /* Mengatur alignment vertical ke tengah */
+}
+   
+   @media(max-width: 767px){
+    #side_nav{
+      margin-left: -250px;
+      position: absolute;
+      min-height: 100vh;
+      z-index: 1;
+   
+    }
+    #side_nav.active{
+      margin-left: 0;
+     }
+   }
+
+   @media (min-width: 768px) {
+    table {
+        font-size: 16px; /* Ukuran font untuk desktop */
+    }
+    .btn {
+        font-size: 14px; /* Ukuran font tombol untuk desktop */
+    }
+}
+
+/* Aturan CSS untuk mode mobile (lebar layar <= 768px) */
+@media (max-width: 768px) {
+    table {
+        font-size: 12px; /* Ukuran font untuk mobile (ganti sesuai kebutuhan) */
+    }
+    .btn {
+        font-size: 10px; /* Ukuran font tombol untuk mobile (ganti sesuai kebutuhan) */
+    }
+}
