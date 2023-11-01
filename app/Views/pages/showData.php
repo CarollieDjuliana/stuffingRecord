@@ -4,65 +4,79 @@
 <link href="<?= base_url('/assets/css/stylePdf.css'); ?>" rel="stylesheet" type="text/css">
 
 <style>
-    /* Style untuk setiap tabel */
     .table {
-        width: 80%;
+        width: 100%;
         table-layout: fixed;
-        /* Lebar masing-masing tabel */
         border-collapse: collapse;
-        margin-bottom: 20px;
         border-collapse: collapse;
         width: 100%;
         border: 1px solid #ddd;
+        font-size: 18%;
+    }
+
+    .table-container {
+        display: flex;
+        justify-content: space-between;
+
     }
 
     table th,
     table td {
+        background-color: white;
         border: 1px solid #ddd;
-        padding: 8px;
         text-align: left;
-        width: 8%;
-        /* Tetapkan lebar sel (misalnya, 10%) */
+        width: 100%;
         word-wrap: break-word;
-        /* Membungkus teks yang panjang agar tidak merusak desain tabel */
+        white-space: nowrap;
     }
 
     table th {
-        background-color: transparent;
         font-weight: bold;
         color: #333;
+        padding: 0px;
     }
 
-    table th,
-    table td {
-        width: 15%;
-        /* Ubah lebar sel sesuai keinginan Anda */
+    table.tg td,
+    table.tg th {
+        text-align: center;
+        white-space: nowrap;
+        word-wrap: break-word;
+        /* Tetapkan nowrap untuk mencegah pemutaran otomatis */
+        font-size: 40%;
+        padding: 4px;
     }
 
-    h3,
-    h4 {
-        font-size: 18px;
-        /* Ubah ukuran teks sesuai keinginan Anda */
+    table.tg {
+        margin: 0 auto;
     }
 
-    button {
-        padding: 0;
-        /* Menghapus padding */
+    table.bottom td,
+    table.bottom th {
+        font-size: 40%;
+        padding: 3px;
+        background-color: transparent;
+        border: none;
+    }
+
+    table.bottom {
+        background-color: transparent;
+        border: none;
     }
 
     .section {
-        margin-bottom: 10px;
-        /* Ubah jarak sesuai keinginan Anda */
+        padding: 0px;
     }
 
-    /* style-cetak.css */
-
-    .cetak-hilang {
-        display: none;
-    }
-
-    /* Gaya tambahan untuk tampilan cetakan, seperti menghilangkan padding, margin, dll. */
+    /* Gaya tambahan untuk tampilan cetakan */
     @media print {
+        title {
+            display: none;
+        }
+
+        @page {
+            size: auto;
+        }
+
         button {
             display: none;
         }
@@ -79,223 +93,295 @@
 
         body {
             text-align: center;
-            margin: 4px auto;
+            margin: auto;
 
         }
+
+        @page {
+            margin: 5px auto;
+        }
+
+        @top-left {
+            content: none;
+        }
+
+        .teks-halaman {
+            display: block;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+
+        table.tg td,
+        table.tg th {
+            text-align: center;
+            white-space: nowrap;
+            word-wrap: break-word;
+            font-size: 40%;
+            padding: 3px;
+        }
+
     }
 </style>
 
 <!-- Tabel Bootstrap untuk Menampilkan Data -->
 
+<head>
+    <title>Contoh Halaman Cetak</title>
+</head>
+
 <body>
 
     <!-- Tombol "Download PDF" -->
     <!-- <a href="<?= base_url('downloadPdf') ?>" class="btn btn-primary">Download PDF</a> -->
-    <button onclick="printCustomView()">Unduh PDF</button>
+    <button onclick="printCustomView()">Print PDF</button>
     <button id="edit-button">Edit Data</button>
 
     <!-- Header/Kop -->
     <div class="header">
-        <img src="/assets/images/logoWithText.png">
-        <h3>STUFFING INSPECTION RECORD <br> PT. MUSI KALIJAYA PALEMBANG
-        </h3>
+        <img style="width: 28%" src="/assets/images/logoWithText.png">
+        <p style="font-size: 80%;">STUFFING INSPECTION RECORD <br> PT. MUSI KALIJAYA PALEMBANG
+        </p>
     </div>
 
     <!-- Garis Pemisah -->
     <hr>
 
-    <div class="content">
-        <div class="section">
-            <div class="two-tables table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>SHIPPER</th>
-                        <td>:</td>
-                        <td id="shipper"></td>
-                    </tr>
-                    <tr>
-                        <th>CONTRACT NO</th>
-                        <td>:</td>
-                        <td id="no_booking"></td>
-                    </tr>
-                    <tr>
-                        <th>TERM</th>
-                        <td>:</td>
-                        <td id="term"></td>
-                    </tr>
-                </table>
 
-                <table class="table">
-                    <tr>
-                        <th>COMMODITY</th>
-                        <td>:</td>
-                        <td id="comodity"></td>
-                    </tr>
-                    <tr>
-                        <th>QUANTITY</th>
-                        <td>:</td>
-                        <td id="quantity"></td>
-                    </tr>
-                    <tr>
-                        <th>GRADE</th>
-                        <td>:</td>
-                        <td id="grade"></td>
-                    </tr>
-                </table>
+    <div class="section">
+        <div class="table-container  table-responsive">
+            <table class="tg">
+                <tr>
+                    <th>SHIPPER</th>
+                    <td>:</td>
+                    <td id="shipper"></td>
+                </tr>
+                <tr>
+                    <th>CONTRACT NO</th>
+                    <td>:</td>
+                    <td id="no_booking"></td>
+                </tr>
+                <tr>
 
-                <table class="table">
-                    <tr>
-                        <th>SHIPPING LINE</th>
-                        <td>:</td>
-                        <td id="shipping_line"></td>
-                    </tr>
-                    <tr>
-                        <th>VASSEL NAME</th>
-                        <td>:</td>
-                        <td id="vassel_name"></td>
-                    </tr>
-                    <tr>
-                        <th>VOYAGE</th>
-                        <td>:</td>
-                        <td id="voyage"></td>
-                    </tr>
-                </table>
-            </div>
+                    <th>TERM</th>
+                    <td>:</td>
+                    <td id="term"></td>
+                </tr>
+                <tr>
+                    <th>COMMODITY</th>
+                    <td>:</td>
+                    <td id="comodity"></td>
+                </tr>
+
+                <tr>
+                    <th>QUANTITY</th>
+                    <td>:</td>
+                    <td id="quantity"></td>
+                </tr>
+                <tr>
+                    <th>GRADE</th>
+                    <td>:</td>
+                    <td id="grade"></td>
+                </tr>
+            </table>
+            <table class="tg">
+                <tr>
+                    <th>SHIPPING LINE</th>
+                    <td>:</td>
+                    <td id="shipping_line"></td>
+                </tr>
+                <tr>
+                    <th>VESSEL NAME</th>
+                    <td>:</td>
+                    <td id="vessel_name"></td>
+                </tr>
+                <tr>
+                    <th>VOYAGE</th>
+                    <td>:</td>
+                    <td id="voyage"></td>
+                </tr>
+                <tr>
+                    <th>PORT OF LOADING</th>
+                    <td>:</td>
+                    <td id="port_of_loading"></td>
+                </tr>
+                <tr>
+                    <th>DESTINATION</th>
+                    <td>:</td>
+                    <td id="destination"></td>
+                </tr>
+                <tr>
+                    <th>E.T.D</th>
+                    <td>:</td>
+                    <td id="etd"></td>
+                </tr>
+            </table>
+            <table class="tg">
+                <tr>
+                    <th>STUFFING PLACE</th>
+                    <td>:</td>
+                    <td id="stuffing_place"></td>
+                </tr>
+                <tr>
+                    <th>STUFFING BY</th>
+                    <td>:</td>
+                    <td id="stuffing_by"></td>
+                </tr>
+                <tr>
+                    <th>LOCATION</th>
+                    <td>:</td>
+                    <td id="location"></td>
+                </tr>
+                <tr>
+                    <th>WEATHER</th>
+                    <td>:</td>
+                    <td id="weather"></td>
+                </tr>
+            </table>
         </div>
-
-
-        <div class="section">
-            <div class="two-tables table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>PORT OF LOADING</th>
-                        <td>:</td>
-                        <td id="port_of_loading"></td>
-                    </tr>
-                    <tr>
-                        <th>DESTINATION</th>
-                        <td>:</td>
-                        <td id="destination"></td>
-                    </tr>
-                    <tr>
-                        <th>E.T.D</th>
-                        <td>:</td>
-                        <td id="etd"></td>
-                    </tr>
-                </table>
-                <table class="table">
-                    <tr>
-                        <th>STUFFING PLACE</th>
-                        <td>:</td>
-                        <th id="stuffing_place"></th>
-                    </tr>
-                    <tr>
-                        <th>STUFFING BY</th>
-                        <td>:</td>
-                        <th id="stuffing_by"></th>
-                    </tr>
-                    <tr>
-                        <th>LOCATION</th>
-                        <td>:</td>
-                        <th id="location"></th>
-                    </tr>
-                </table>
-
-                <table class="table">
-                    <tr>
-                        <th>WEATHER</th>
-                        <td>:</td>
-                        <th id="weather"></th>
-                    </tr>
-
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <h4 style="text-align: center;">RUBBER CONDITION AT RECEIVING</h4>
-            <div class="two-tables table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>RUBBER DELIVERED TO STUFFING PLACE BY TRUCKS / BARGES</th>
-                        <td>SHIPPER</td>
-                    </tr>
-                    <tr>
-                        <th>FOREIGN MATTERS CONTAMINATION</th>
-                        <td>NO</td>
-                    </tr>
-                    <tr>
-                        <th>WET/DAMAGE</th>
-                        <td>NO</td>
-                    </tr>
-                    <tr>
-                        <th>BALE DEFORMATION / PALLETS DAMAGE</th>
-                        <td>NO</td>
-                    </tr>
-                </table>
-                <table class="table">
-                    <tr>
-                        <th>PALLETS WITH BORES</th>
-                        <td>NO</td>
-                    </tr>
-                    <tr>
-                        <th>IS THE SHIPPER / PRODUCER INFORM OF THE PROBLEM </th>
-                        <td>NO</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="two-tables table-responsive">
-                <table class="table">
-                    <tr>
-                        <th>STUFFING PLACE</th>
-                        <td>:</td>
-                        <td>STUFFING PLACE</td>
-                    </tr>
-                    <tr>
-                        <th>STUFFING BY</th>
-                        <td>:</td>
-                        <td>STUFFING BY</td>
-                    </tr>
-                    <tr>
-                        <th>LOCATION</th>
-                        <td>:</td>
-                        <td>LOCATION</td>
-                    </tr>
-                </table>
-
-                <table class="table">
-                    <tr>
-                        <th>WEATHER</th>
-                        <td>:</td>
-                        <td>WEATHER</td>
-                    </tr>
-
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="two-tables table-responsive">
-
-
-                <div id="containerInspection"></div>
-                <div id="containerDataContainer" class=" two-tables table-responsive"></div>
-
-            </div>
-
-
-        </div>
-
     </div>
+
+
+    <div class="section">
+        <h6 style="text-align: center; font-size: 80%;">RUBBER CONDITION AT RECEIVING</h6>
+        <div class="table-container  table-responsive">
+            <table class="tg">
+                <tr>
+                    <th>RUBBER DELIVERED TO STUFFING PLACE BY TRUCKS / BARGES</th>
+                    <td>:</td>
+                    <td>SHIPPER</td>
+                </tr>
+                <tr>
+                    <th>FOREIGN MATTERS CONTAMINATION</th>
+                    <td>:</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <th>WET/DAMAGE</th>
+                    <td>:</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <th>BALE DEFORMATION / PALLETS DAMAGE</th>
+                    <td>:</td>
+                    <td>NO</td>
+                </tr>
+            </table>
+            <table class="tg">
+                <tr>
+                    <th>PALLETS WITH BORES</th>
+                    <td>:</td>
+                    <td colspan="2">NO</td>
+                </tr>
+                <tr>
+                    <th>IS THE SHIPPER / PRODUCER INFORM OF THE PROBLEM </th>
+                    <td>:</td>
+                    <td colspan="2">NO/YES</td>
+                </tr>
+                <tr>
+                    <th>IF YES: </th>
+                    <td>DATE :</td>
+                    <td>TIME :</td>
+                    <td>HOURS :</td>
+                </tr>
+                <tr>
+                    <th colspan="4">BY PHONE / FAX / INREASON / OTHERS</th>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <div class="section">
+        <div class=" table-container table-responsive">
+            <table class="tg">
+                <tr>
+                    <th rowspan="3">CONTAINER <br> NUMBER</th>
+                    <th rowspan="3">SEAL <br> NUMBER</th>
+                    <th rowspan="3">STUFFING <br> DATE</th>
+                    <th colspan="18">ITEM</th>
+                </tr>
+                <tr>
+                    <th colspan="2">CEILING</th>
+                    <th colspan="2">WALLS</th>
+                    <th colspan="3">RIGHT SIDE</th>
+                    <th colspan="3">LEFT SIDE</th>
+                    <th colspan="3">FLOOR</th>
+                    <th colspan="2">DOOR</th>
+                    <th colspan="3">CLEANLINESS</th>
+                </tr>
+                <tr>
+                    <th> HOLES</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>RUBBER <br>SEAL BROKEN</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>WOODEN CHIPS /<br> SPLINTER</th>
+                    <th>PLASTIC RESIN,<br> ETC</th>
+                    <th>WET,<br> OIL STAINS</th>
+                </tr>
+                </thead>
+                <tbody id="containerDataContainer">
+                    <!-- <div id="containerDataContainer"> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="section">
+        <div class="table-container  table-responsive">
+            <table class="bottom">
+                <tr>
+                    <th>INSPECTED BY : </th>
+                    <td id="shipper"></td>
+                </tr>
+                <tr>
+                    <th>NAME : </th>
+                    <td id="no_booking"></td>
+                </tr>
+            </table>
+            <table class="bottom">
+                <tr>
+                    <th>INSPECTED BY : </th>
+                    <td id="shipper"></td>
+                </tr>
+                <tr>
+                    <th>DATE</th>
+                    <td id="no_booking"></td>
+                </tr>
+            </table>
+            <table class="bottom">
+                <tr>
+                    <th>REMARKS : </th>
+                    <td id="shipping_line"></td>
+                </tr>
+            </table>
+            <table class="bottom">
+                <tr>
+                    <th>ACKNOWLEDGED BY : </th>
+                    <td id="stuffing_place"></td>
+                </tr>
+                <tr>
+                    <th>NAME : </th>
+                    <td id="stuffing_by"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="section">
         <div class="documentation">
-            <div class="container mt-4">
-                <h1>Dokumentasi</h1>
+            <div class="container">
+                <h5>Dokumentasi</h5>
                 <p>Berikut merupakan dokumentasi dari prosess stuffing yang telah berjalan </p>
                 <div class="row" id="photoGallery">
                     <!-- Gambar akan ditampilkan di sini -->
@@ -310,23 +396,27 @@
 
 
 <script>
+    function cetakHalaman() {
+        window.print();
+    }
     // Fungsi untuk mencetak tampilan khusus ke PDF
     function printCustomView() {
-        // Menghilangkan kelas cetak-hilang agar elemen-elemen tertentu tidak tersembunyi
-        var cetakElems = document.querySelectorAll('.cetak-hilang');
-        for (var i = 0; i < cetakElems.length; i++) {
-            cetakElems[i].classList.remove('cetak-hilang');
+        var teksHalaman = document.createElement('div');
+        teksHalaman.className = 'teks-halaman';
+        teksHalaman.textContent = 'Stuffing Record PT Musi Kalijaya';
+
+        var semuaHalaman = document.querySelectorAll('.teks-halaman');
+        for (var i = 0; i < semuaHalaman.length; i++) {
+            semuaHalaman[i].remove();
         }
 
-        // Mencetak tampilan dengan format CSS cetakan khusus
+        document.body.appendChild(teksHalaman);
+
+        // Mencetak halaman
         window.print();
-
-        // Mengembalikan kelas cetak-hilang setelah mencetak
-        for (var i = 0; i < cetakElems.length; i++) {
-            cetakElems[i].classList.add('cetak-hilang');
-        }
     }
 </script>
+
 
 <script type="module" src="<?= base_url('/assets/js/showData.js'); ?>"></script>
 

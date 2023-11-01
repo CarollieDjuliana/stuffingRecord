@@ -4,21 +4,28 @@
 
 <body>
     <div class="container-fluid p-3">
-        <!-- add activity button -->
-        <div class=" text-md p-2">
-            <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end p-3" onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
-        </div>
-        <!-- search bar -->
-        <div class="input-group p-3">
-            <div class="form-outline">
-                <input id="search-focus" type="search" id="form1" class="form-control" />
+        <div class="col-12 mb-3">
+            <div class="d-flex justify-content-between">
+                <!-- search bar -->
+                <div class="input-group p-3">
+                    <div class="form-outline" style="flex: 1; margin-right: 10px;">
+                        <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="button" name="searchButton" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
-            <button type="button" name="searchButton" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-            </button>
+
+            <!-- add activity button -->
+            <div class="me-auto">
+                <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end text-sm" onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
+            </div>
         </div>
-        <!-- record tabel -->
-        <table class="table container-fluid table-responsive" style="max-width: 100%; width: 100%;">
+    </div>
+    <!-- record tabel -->
+    <div class="table-responsive mt-3">
+        <table class="table">
             <thead>
                 <tr>
                     <th scope="col">DATE
@@ -35,11 +42,11 @@
                 </tr>
             </thead>
             <tbody id="data-table-body">
-
+                <!-- Isi tabel -->
             </tbody>
         </table>
     </div>
-
+    </div>
 </body>
 <script type="module" src="<?= base_url('/assets/js/dashboard.js'); ?>"></script>
 

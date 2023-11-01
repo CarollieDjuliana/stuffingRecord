@@ -110,9 +110,9 @@ document.getElementById("submit").onclick = function () {
       document.getElementById("stuffing_by").value = "";
       document.getElementById("location").value = "";
       document.getElementById("weather").value = "";
- 
-      // Mengarahkan kembali ke halaman /addActivityContainer
-      window.location.href = "/addActivityContainer?quantityV=" + quantityV;
+
+      // Mengarahkan kembali ke halaman /dashboard
+      window.location.href = "/dashboard";
 
       // Pengiriman data container ke Firebase
       for (var i = 0; i < containerData.length; i++) {

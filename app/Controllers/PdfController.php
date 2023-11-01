@@ -1,42 +1,35 @@
 <?php
 
-// PdfController.php
+namespace App\Controllers;
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-class PdfController
+class PdfController extends BaseController
 {
     public function generatePdf()
     {
-        // Inisialisasi DOMPDF
+        // Konfigurasi Dompdf
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
         $dompdf = new Dompdf($options);
 
-        // Render HTML to PDF
-        $html = '<html><body><h1>Hello, World!</h1></body></html>';
+        // HTML yang akan dijadikan PDF
+        $data = [
+            'dynamicContent' => 'Konten dinamis disini', // Gantilah ini dengan konten dinamis Anda
+        ];
+
+        $html = view('pages\showData', $data); // Gantilah 'pdf_template' dengan nama view HTML Anda
+
+        // Muat HTML ke Dompdf
         $dompdf->loadHtml($html);
+
+        // Render PDF
         $dompdf->render();
 
-        // Output PDF to browser
-        $dompdf->stream('document.pdf', array('Attachment' => 0));
-    }
-
-    public function generatePdfWithData()
-    {
-        // ... (kode untuk menampilkan data)
-
-        // Inisialisasi DOMPDF
-        $options = new Options();
-        $options->set('isHtml5ParserEnabled', true);
-        $dompdf = new Dompdf($options);
-
-        // Render HTML to PDF
-        $html = '<html><body><h1>Hello, World!</h1></body></html>'; // Ganti dengan HTML yang sesuai dengan data Anda
-        $dompdf->loadHtml($html);
-        $dompdf->render();
-
-        // Output PDF to browser
-        $dompdf->stream('document.pdf', array('Attachment' => 0));
+        // Simpan PDF ke file atau tampilkan langsung
+        $dompdf->stream('output.pdf');
     }
 }

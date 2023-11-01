@@ -3,7 +3,6 @@
 
 <?= $this->section('content'); ?>
 
-
 <?php
 function form_foto($container_fill, $index)
 {
@@ -19,11 +18,11 @@ function form_foto($container_fill, $index)
             <button id="openCameraButton' . $index . '" class="btn btn-primary" data-index="' . $index . '">Open Camera</button>
         </div>
         <div class="col">
-            <input type="file" id="fileInput' . $index . '" class="btn btn-light" accept="image/*" data-index="' . $index . '" name="' . $container_fill . '" " value="Select Photos">
+            <input type="file" id="fileInput' . $index . '" class="btn " accept="image/*" data-index="' . $index . '" name="' . $index . '-' . $container_fill . '" " value="Select Photos">
         </div>
         <div class="col">
             <!-- Tombol untuk Upload Gambar -->
-            <button id="uploadButton' . $index . '" class="btn btn-success" data-index="' . $index . '" " name="' . $container_fill . '">Upload Image</button>
+            <button id="uploadButton' . $index . '" class="btn btn-success" data-index="' . $index . '" " name="' . $index . '-' . $container_fill . '">Upload Image</button>
         </div>
     </div>
     <!-- penampung result -->
@@ -39,6 +38,7 @@ function form_foto($container_fill, $index)
             </div>
         </div>
     </div>
+    <hr>
     <!-- penampung result -->
     <div class="row"></div>';
 
@@ -53,7 +53,7 @@ function form_foto($container_fill, $index)
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cameraModalLabel">Camera View</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <button id="closeButton_x" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -61,7 +61,7 @@ function form_foto($container_fill, $index)
                 <video id="cameraView" autoplay data-index="-1"></video>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button>
+                <button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button>
                 <button id="captureButton" class="btn btn-primary" data-index="-1">Capture Image</button>
             </div>
         </div>
@@ -71,7 +71,9 @@ function form_foto($container_fill, $index)
 <!-- page -->
 <div class="container">
     <div class="content-upper mt-4">
-        <h3>Add Photos</h3>
+        <h6>
+            <div id="shipper"></div>
+        </h6>
         <div class="row">
             <div class="col-8">
                 <table class="table table-striped">
@@ -93,10 +95,6 @@ function form_foto($container_fill, $index)
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col">
-                <!-- toggle sidebar -->
-                <button class="btn btn-primary mt-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Choose Container</button>
             </div>
         </div>
         <hr>
@@ -155,7 +153,7 @@ function form_foto($container_fill, $index)
 
     <!-- SIDEBAR -->
     <?= $this->section('sidebar'); ?>
-    <h1><span class="text-decoration-none px-3 py-2 d-block font-weight-bold" style="font-size : 60%">CONTAINERS</span></h1>
+    <h5><span class="text-decoration-none px-3 py-2 d-block font-weight-bold" style="font-size : 60%">CONTAINERS</span></h5>
     <!-- Menampilkan jumlah foto yang sudah di upload -->
     <div class="uploadedContainer">
         <span class="text-white px-3 py-2 d-block font-weight-bold">Uploaded (<span id="photoDisplayRatio"></span>)</span>
@@ -163,7 +161,7 @@ function form_foto($container_fill, $index)
     <div id="photoDisplayRatio"></div>
     <div id="data-table-container" class="button-container"></div>
     <!-- Tombol " Close This Activity" -->
-    <div class="close-activity-button px-2 py-2">
+    <div class="mt-5 close-activity-button px-2 py-2">
         <button id="closeActivityButton" class="btn btn-danger">Close This Activity</button>
     </div>
     <?= $this->endSection(); ?>
@@ -176,5 +174,5 @@ function form_foto($container_fill, $index)
     <!-- Sertakan Firebase Konfigurasi dan Kode JavaScript -->
     <script type="module" src="<?= base_url('/assets/js/uploadImage.js'); ?>"></script>
     <script type="module" src="<?= base_url('/assets/js/addData.js'); ?>"></script>
-
-    <?= $this->endSection(); ?>
+</div>
+<?= $this->endSection(); ?>

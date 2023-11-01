@@ -4,71 +4,71 @@
 
 <body>
     <div class="container">
-        <h1 class="mt-4">Edit Data</h1>
+        <h5>Edit Data</h5>
         <div class="row">
             <div class="col-md-6">
                 <form id="edit-form" class="mt-4">
                     <div class="form-group">
-                        <label for="edited-no-booking">No Booking</label>
-                        <input type="text" class="form-control" id="edited-no-booking" placeholder="No Booking">
-                    </div>
-                    <div class="form-group">
                         <label for="edited-shipper">Shipper</label>
                         <input type="text" class="form-control" id="edited-shipper" placeholder="Shipper">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
+                        <label for="edited-no-booking">No Booking</label>
+                        <input type="text" class="form-control" id="edited-no-booking" placeholder="No Booking">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="edited-term">Term</label>
                         <input type="text" class="form-control" id="edited-term" placeholder="Term">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-commodity">Commodity</label>
                         <input type="text" class="form-control" id="edited-commodity" placeholder="Commodity">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-quantity">Quantity</label>
                         <input type="number" class="form-control" id="edited-quantity" placeholder="Quantity">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-grade">Grade</label>
                         <input type="text" class="form-control" id="edited-grade" placeholder="Grade">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-shipping-line">Shipping Line</label>
                         <input type="text" class="form-control" id="edited-shipping-line" placeholder="Shipping Line">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-vessel-name">Vessel Name</label>
                         <input type="text" class="form-control" id="edited-vessel-name" placeholder="Vessel Name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-voyage">Voyage</label>
                         <input type="text" class="form-control" id="edited-voyage" placeholder="Voyage">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-port-of-loading">Port of Loading</label>
                         <input type="text" class="form-control" id="edited-port-of-loading" placeholder="Port of Loading">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-destination">Destination</label>
                         <input type="text" class="form-control" id="edited-destination" placeholder="Destination">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-etd">ETD</label>
                         <input type="date" class="form-control" id="edited-etd" placeholder="ETD">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-stuffing-place">Stuffing Place</label>
                         <input type="text" class="form-control" id="edited-stuffing-place" placeholder="Stuffing Place">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-stuffing-by">Stuffing By</label>
                         <input type="text" class="form-control" id="edited-stuffing-by" placeholder="Stuffing By">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-location">Location</label>
                         <input type="text" class="form-control" id="edited-location" placeholder="Location">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <label for="edited-weather">Weather</label>
                         <input type="text" class="form-control" id="edited-weather" placeholder="Weather">
                     </div>
@@ -76,7 +76,7 @@
             </div>
             <div class="col-md-6">
                 <div class="mt-4">
-                    <h2>Data Container</h2>
+                    <h5>Data Container</h5>
                     <div id="edited-container-data">
 
                     </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <button id="update-button" class="btn btn-primary mt-3">Update Data</button>
+        <button id="update-button" class="btn btn-primary mt-3 mb-3">UPDATE</button>
     </div>
 
 
@@ -160,16 +160,16 @@
                             const containerDiv = document.createElement("div");
                             containerDiv.innerHTML = `
                             <div class="container mt-3">
-                                <h5>${containerNumber}</h5>
-                                    <div class="form-group">
+                                <h6>Container ${containerNumber}</h6>
+                                    <div class="form-group mt-2">
                                         <label for="edited-container-number-${containerNumber}">Container Number</label>
                                         <input type="text" class="form-control" name="edited-container-number" id="edited-container-number-${containerNumber}" value="${containerNumber}" placeholder="Container Number">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mt-2">
                                         <label for="edited-seal-number-${containerNumber}">Seal Number</label>
                                         <input type="text" class="form-control" name="edited-seal-number" id="edited-seal-number-${containerNumber}" value="${container.seal_number}" placeholder="Seal Number">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mt-2">
                                         <label for="edited-stuffing-date-${containerNumber}">Stuffing Date</label>
                                         <input type="date" class="form-control" name="edited-stuffing-date" id="edited-stuffing-date-${containerNumber}" value="${container.stuffing_date}" placeholder="Stuffing Date">
                                     </div>
@@ -231,6 +231,8 @@
             update(dataRef, editedData)
                 .then(() => {
                     alert("Data berhasil diperbarui!");
+                    window.location.href = '/showData?shipper=' + shipper + '&no_booking=' + no_booking;
+
                 })
                 .catch((error) => {
                     console.error("Error updating data: ", error);
