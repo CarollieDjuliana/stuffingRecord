@@ -1,34 +1,16 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 import { getDatabase, ref, update, onValue, get } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 import { getStorage, listAll, getDownloadURL, ref as storageRef } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+import { firebaseApp } from './fireConfig.js';
 // import { jsPDF } from "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js";
 
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
-    authDomain: "stuffingrecord-mkj.firebaseapp.com",
-    databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "stuffingrecord-mkj",
-    storageBucket: "stuffingrecord-mkj.appspot.com",
-    messagingSenderId: "515562362541",
-    appId: "1:515562362541:web:f692bb65ef317963765824",
-    measurementId: "G-4GEZPYYPS5"
-};
-
-// Inisialisasi Firebase 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const storage = getStorage(app);
+const db = getDatabase(firebaseApp);
+const storage = getStorage(firebaseApp);
 
 const shipper = new URLSearchParams(window.location.search).get("shipper");
 const no_booking = new URLSearchParams(window.location.search).get("no_booking");
 const container = new URLSearchParams(window.location.search).get("container");
 const dataPath = "activity/" + shipper + "/" + no_booking+'/'+'container_data' +'/'+ container;
 const dataRef = ref(db, dataPath);
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
    
@@ -41,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Data exists:", data);
             
                 // Menggunakan nilai-nilai variabel untuk menyusun HTML
-                document.getElementById("container_number").textContent = data.container_number;
-                
+                document.getElementById("shipper").textContent = shipper;   
+                document.getElementById("container_number").textContent = data.container_number;        
                 document.getElementById("seal_number").textContent = data.seal_number;
                 document.getElementById("stuffing_date").textContent = data.stuffing_date;
     
@@ -73,13 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Mengubah status ke "COMPLETE"
       update(ref(db, "activity/" + shipper + "/" + no_booking), { status: "COMPLETE" })
         .then(() => {
-          alert("Activity status changed to COMPLETE");
+          // alert("Activity status changed to COMPLETE");
           // Menutup modal setelah konfirmasi
         const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
         confirmationModal.hide();
 
         // Kembali ke halaman dashboard
-        // window.location.href = "/dashboard";
+        window.location.href = "/dashboard";
         })
         .catch((error) => {
           console.error("Error updating status: ", error);
@@ -123,8 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 containerKeys.forEach((containerKey, index) => {
                   const containerData = noBooking.container_data[containerKey];
                   const container_num = containerData.container_number;
+                  console.log(container_num);
                   tableHTML += `
-                    <li><a href="addData?shipper=${shipperKey}&no_booking=${noBookingKey}&container=${containerKey}" class="btn btn-light ${containerKey === currentContainer ? 'active-button' : ''}">Container ${container_num}</a></li>
+                    <li><a href="addData?shipper=${shipperKey}&no_booking=${noBookingKey}&container=${containerKey}" class="btn btn-light ${containerKey === currentContainer ? 'active-button' : ''}">Container ${containerKey}</a></li>
                   `;
                 });
               }

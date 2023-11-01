@@ -74,13 +74,40 @@ document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) =>
     });
 });
 
+function stopCamera() {
+    const video = document.getElementById('cameraView');
+    const stream = video.srcObject;
+
+    if (stream) {
+        const tracks = stream.getTracks();
+
+        tracks.forEach((track) => {
+            track.stop();
+        });
+
+        video.srcObject = null;
+    }
+}
+
+
 // Event listener untuk tombol Capture Image
 document.getElementById('captureButton').addEventListener('click', () => {
     const index = document.getElementById('cameraView').getAttribute('data-index'); // Ambil indeks form yang aktif
     const video = document.getElementById('cameraView');
     captureImage(index, video);
     $('#cameraModal').modal('hide'); // Tutup modal ketika capture
+    stopCamera(); // Hentikan stream media saat modal ditutup
 });
+
+
+document.getElementById('closeButton').addEventListener('click', () => {
+    stopCamera();
+});
+
+document.getElementById('closeButton_x').addEventListener('click', () => {
+    stopCamera();
+});
+
 
 // Event listener untuk input file
 document.querySelectorAll('[id^="fileInput"]').forEach((fileInput, index) => {

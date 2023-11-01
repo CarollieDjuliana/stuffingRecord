@@ -1,20 +1,5 @@
-// Import yang diperlukan dari Firebase SDK versi 9
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
-  authDomain: "stuffingrecord-mkj.firebaseapp.com",
-  databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "stuffingrecord-mkj",
-  storageBucket: "stuffingrecord-mkj.appspot.com",
-  messagingSenderId: "515562362541",
-  appId: "1:515562362541:web:f692bb65ef317963765824",
-  measurementId: "G-4GEZPYYPS5"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+import { firebaseApp } from './fireConfig.js';
 
 document.addEventListener("DOMContentLoaded", function () {
   var shipperV, no_bookingV, termV, comodityV, quantityV, gradeV, shipping_lineV, vassel_nameV, voyageV, port_of_loadingV, destinationV, etdV, stuffing_placeV, stuffing_byV, locationV, weatherV;
@@ -63,7 +48,7 @@ document.getElementById("submit").onclick = function () {
   readForm();
 
   // Mendapatkan referensi ke Firebase Realtime Database
-  const db = getDatabase();
+  const db = getDatabase(firebaseApp);
 
   // Mendefinisikan path untuk data
   const dataPath = "activity/" + shipperV + "/" + no_bookingV;
@@ -110,9 +95,9 @@ document.getElementById("submit").onclick = function () {
       document.getElementById("stuffing_by").value = "";
       document.getElementById("location").value = "";
       document.getElementById("weather").value = "";
- 
-      // Mengarahkan kembali ke halaman /addActivityContainer
-      window.location.href = "/addActivityContainer?quantityV=" + quantityV;
+
+      // Mengarahkan kembali ke halaman /dashboard
+      window.location.href = "/dashboard";
 
       // Pengiriman data container ke Firebase
       for (var i = 0; i < containerData.length; i++) {
