@@ -1,0 +1,21 @@
+runtime: php82
+env: flex
+runtime_config:
+  document_root: public
+
+env_variables:
+  # Atur variabel lingkungan sesuai kebutuhan
+  CI_ENV: production
+  # Dan variabel lainnya yang diperlukan oleh aplikasi Anda
+
+handlers:
+  - url: /(.+\.php)$
+    script: auto
+
+  - url: /
+    static_files: public/index.php
+    upload: public/index.php
+
+  - url: /(.+)
+    static_files: public/$1
+    upload: public/(.*)

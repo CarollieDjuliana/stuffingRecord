@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->setAutoRoute(true);
+$routes->setDefaultMethod('Pages::login');
 $routes->get('/', 'Pages::login');
 $routes->get('/login', 'Pages::login');
 $routes->get('/register', 'Pages::register');
