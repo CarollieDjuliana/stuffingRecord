@@ -48,7 +48,8 @@ function form_foto($container_fill, $index)
 
 
 <!-- Modal untuk Menampilkan Kamera -->
-<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel" aria-hidden="true" data-index="-1">
+<div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalLabel"
+    aria-hidden="true" data-index="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,7 +62,8 @@ function form_foto($container_fill, $index)
                 <video id="cameraView" autoplay data-index="-1"></video>
             </div>
             <div class="modal-footer">
-                <button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal">Close</button>
+                <button id="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    data-dismiss="modal">Close</button>
                 <button id="captureButton" class="btn btn-primary" data-index="-1">Capture Image</button>
             </div>
         </div>
@@ -133,7 +135,8 @@ function form_foto($container_fill, $index)
 
 
     <!-- Modal Bootstrap untuk konfirmasi -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,10 +156,12 @@ function form_foto($container_fill, $index)
 
     <!-- SIDEBAR -->
     <?= $this->section('sidebar'); ?>
-    <h5><span class="text-decoration-none px-3 py-2 d-block font-weight-bold" style="font-size : 60%">CONTAINERS</span></h5>
+    <h5><span class="text-decoration-none px-3 py-2 d-block font-weight-bold" style="font-size : 60%">CONTAINERS</span>
+    </h5>
     <!-- Menampilkan jumlah foto yang sudah di upload -->
     <div class="uploadedContainer">
-        <span class="text-white px-3 py-2 d-block font-weight-bold">Uploaded (<span id="photoDisplayRatio"></span>)</span>
+        <span class="text-white px-3 py-2 d-block font-weight-bold">Uploaded (<span
+                id="photoDisplayRatio"></span>)</span>
     </div>
     <div id="photoDisplayRatio"></div>
     <div id="data-table-container" class="button-container"></div>
@@ -172,7 +177,7 @@ function form_foto($container_fill, $index)
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Sertakan Firebase Konfigurasi dan Kode JavaScript -->
-    <script type="module" src="<?= base_url('/assets/js/uploadImage.js'); ?>"></script>
-    <script type="module" src="<?= base_url('/assets/js/addData.js'); ?>"></script>
+    <script type="module" src="<?= '/assets/js/uploadImage.js'; ?>"></script>
+    <script type="module" src="<?= '/assets/js/addData.js'; ?>"></script>
 </div>
 <?= $this->endSection(); ?>

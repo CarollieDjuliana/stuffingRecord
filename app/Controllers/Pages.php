@@ -49,8 +49,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\dashboard');
     }
@@ -60,8 +60,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\addActivity');
     }
@@ -70,8 +70,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\addActivityContainer');
     }
@@ -80,8 +80,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\addData');
     }
@@ -90,8 +90,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\showData');
     }
@@ -100,8 +100,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\uploadImage');
     }
@@ -110,8 +110,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\profile');
     }
@@ -120,8 +120,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\downloadPdf');
     }
@@ -134,8 +134,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\test');
     }
@@ -145,8 +145,8 @@ class Pages extends BaseController
         $idToken = $this->session->get('userToken');
 
         if (!$idToken) {
-            echo "Token invalid";
-            return redirect()->to('/login');
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
         }
         return view('pages\test2');
     }

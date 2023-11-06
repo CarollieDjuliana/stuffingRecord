@@ -2,22 +2,22 @@
 
 <?= $this->section('content'); ?>
 <style>
-    .bg-custom {
-        background-color: #fdb913;
-    }
+.bg-custom {
+    background-color: #fdb913;
+}
 
-    body {
+body {
 
-        /* Gunakan URL gambar sebagai nilai background-image */
-        background-image: url("assets/images/SI_background.jpg");
-        /* Properti CSS lainnya untuk mengatur latar belakang */
-        background-size: cover;
-        /* Sesuaikan gambar agar mengisi seluruh area */
-        background-repeat: no-repeat;
-        /* Hindari pengulangan gambar */
-        background-attachment: fixed;
+    /* Gunakan URL gambar sebagai nilai background-image */
+    background-image: url("assets/images/SI_background.jpg");
+    /* Properti CSS lainnya untuk mengatur latar belakang */
+    background-size: cover;
+    /* Sesuaikan gambar agar mengisi seluruh area */
+    background-repeat: no-repeat;
+    /* Hindari pengulangan gambar */
+    background-attachment: fixed;
 
-    }
+}
 </style>
 
 <body>
@@ -69,15 +69,18 @@
                         </div>
                     </form>
                     <!-- <p id="error-message"></p> -->
+                    <p>Already have an account? <a href="/login">Log in</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
 
 
-    <script type="module" src="<?= base_url('/assets/js/register.js'); ?>"></script>
+    <script type="module" src="<?= '/assets/js/register.js'; ?>"></script>
 
 </body>
 

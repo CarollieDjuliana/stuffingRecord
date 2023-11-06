@@ -40,82 +40,82 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-<script type="module" src="<?= base_url('/assets/js/fireconfig.js'); ?>"></script>
+<script type="module" src="<?= '/assets/js/fireconfig.js'; ?>"></script>
 <script type="module">
-    import {
-        getAuth,
-        signOut,
-        onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-    import {
-        getDatabase,
-        ref,
-        get,
-        set
-    } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+import {
+    getAuth,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import {
+    getDatabase,
+    ref,
+    get,
+    set
+} from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const auth = getAuth();
+document.addEventListener("DOMContentLoaded", function() {
+    const auth = getAuth();
 
-        // Replace 'your-profile-image.jpg' with the appropriate profile image URL
-        const profileImage = document.querySelector(".card-header img");
-        profileImage.src = "your-profile-image.jpg";
+    // Replace 'your-profile-image.jpg' with the appropriate profile image URL
+    const profileImage = document.querySelector(".card-header img");
+    profileImage.src = "your-profile-image.jpg";
 
-        // Get form elements
-        const nameInput = document.getElementById("name");
-        const emailInput = document.getElementById("email");
-        const positionInput = document.getElementById("position");
-        const teleponInput = document.getElementById("telepon");
-        const unitBisnisInput = document.getElementById("unit-bisnis");
-        const updateButton = document.getElementById("update-button");
+    // Get form elements
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const positionInput = document.getElementById("position");
+    const teleponInput = document.getElementById("telepon");
+    const unitBisnisInput = document.getElementById("unit-bisnis");
+    const updateButton = document.getElementById("update-button");
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                var uid = user.uid;
-                console.log(user.uid);
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            var uid = user.uid;
+            console.log(user.uid);
 
-                // Get user data from Firebase Database
+            // Get user data from Firebase Database
+            const db = getDatabase();
+            const userRef = ref(db, `users/${uid}`);
+
+            updateButton.addEventListener("click", async () => {
                 const db = getDatabase();
                 const userRef = ref(db, `users/${uid}`);
-
-                updateButton.addEventListener("click", async () => {
-                    const db = getDatabase();
-                    const userRef = ref(db, `users/${uid}`);
-                    const snapshot = await get(userRef);
-
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-
-                        // Update user data based on the input
-                        userData.name = nameInput.value;
-                        userData.email = emailInput.value;
-                        userData.position = positionInput.value;
-                        userData.telepon = teleponInput.value;
-                        userData.unit_bisnis = unitBisnisInput.value;
-
-                        // Save the entire updated user data to Firebase Database
-                        await set(userRef, userData);
-
-                        alert("Data has been updated.");
-                    }
-                });
-
                 const snapshot = await get(userRef);
+
                 if (snapshot.exists()) {
                     const userData = snapshot.val();
 
-                    // Fill the form values with data from Firebase
-                    nameInput.value = userData.name || "";
-                    emailInput.value = userData.email || "";
-                    positionInput.value = userData.position || "";
-                    teleponInput.value = userData.telepon || "";
-                    unitBisnisInput.value = userData.unit_bisnis || "";
+                    // Update user data based on the input
+                    userData.name = nameInput.value;
+                    userData.email = emailInput.value;
+                    userData.position = positionInput.value;
+                    userData.telepon = teleponInput.value;
+                    userData.unit_bisnis = unitBisnisInput.value;
+
+                    // Save the entire updated user data to Firebase Database
+                    await set(userRef, userData);
+
+                    alert("Data has been updated.");
                 }
-            } else {
-                // User is not logged in
+            });
+
+            const snapshot = await get(userRef);
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+
+                // Fill the form values with data from Firebase
+                nameInput.value = userData.name || "";
+                emailInput.value = userData.email || "";
+                positionInput.value = userData.position || "";
+                teleponInput.value = userData.telepon || "";
+                unitBisnisInput.value = userData.unit_bisnis || "";
             }
-        });
+        } else {
+            // User is not logged in
+        }
     });
+});
 </script>
 
 <?= $this->endSection(); ?>

@@ -19,7 +19,8 @@
 
             <!-- add activity button -->
             <div class="me-auto">
-                <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end text-sm" onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
+                <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end text-sm"
+                    onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
             </div>
         </div>
     </div>
@@ -48,6 +49,6 @@
     </div>
     </div>
 </body>
-<script type="module" src="<?= base_url('/assets/js/dashboard.js'); ?>"></script>
+<script type="module" src="<?= '/assets/js/dashboard.js'; ?>"></script>
 
 <?= $this->endSection(); ?>

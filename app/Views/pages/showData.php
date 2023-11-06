@@ -1,7 +1,7 @@
 <?= $this->extend('/layout/template'); ?>
 
 <?= $this->section('content'); ?>
-<link href="<?= base_url('/assets/css/stylePdf.css'); ?>" rel="stylesheet" type="text/css">
+<link href="<?= '/assets/css/stylePdf.css'; ?>" rel="stylesheet" type="text/css">
 
 <style>
     .table {
@@ -42,8 +42,14 @@
         white-space: nowrap;
         word-wrap: break-word;
         /* Tetapkan nowrap untuk mencegah pemutaran otomatis */
-        font-size: 40%;
+        font-size: 45%;
         padding: 4px;
+    }
+
+    p {
+        font-size: 50%;
+        padding: 4px;
+        margin: 5px;
     }
 
     table.tg {
@@ -74,7 +80,7 @@
         }
 
         @page {
-            size: auto;
+            size: landscape;
         }
 
         button {
@@ -97,9 +103,9 @@
 
         }
 
-        @page {
+        /* @page {
             margin: 5px auto;
-        }
+        } */
 
         @top-left {
             content: none;
@@ -121,6 +127,14 @@
             padding: 3px;
         }
 
+        p {
+            text-align: left;
+        }
+
+        .documentation {
+            page-break-before: always;
+        }
+
     }
 </style>
 
@@ -133,7 +147,7 @@
 <body>
 
     <!-- Tombol "Download PDF" -->
-    <!-- <a href="<?= base_url('downloadPdf') ?>" class="btn btn-primary">Download PDF</a> -->
+    <!-- <a href="<?= 'downloadPdf' ?>" class="btn btn-primary">Download PDF</a> -->
     <button onclick="printCustomView()">Print PDF</button>
     <button id="edit-button">Edit Data</button>
 
@@ -335,6 +349,7 @@
                 </tbody>
             </table>
         </div>
+        <p>JUDGEMENT CAN BE : YES/NO/ACTION</p>
     </div>
     <div class="section">
         <div class="table-container  table-responsive">
@@ -418,6 +433,6 @@
 </script>
 
 
-<script type="module" src="<?= base_url('/assets/js/showData.js'); ?>"></script>
+<script type="module" src="<?= '/assets/js/showData.js'; ?>"></script>
 
 <?= $this->endSection(); ?>

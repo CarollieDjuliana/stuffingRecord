@@ -51,6 +51,30 @@ function captureImage(index, video) {
 }
 
 // Event listener untuk tombol Open Camera
+// document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) => {
+//     button.addEventListener('click', () => {
+//         const video = document.getElementById('cameraView');
+//         video.dataset.index = button.getAttribute('data-index'); // Set indeks form yang aktif
+
+//         const canvas = document.createElement('canvas');
+//         const context = canvas.getContext('2d');
+
+//         navigator.mediaDevices.getUserMedia({
+//             video: true
+//         })
+//         .then((stream) => {
+//             video.srcObject = stream;
+//             video.play();
+
+//             $('#cameraModal').modal('show'); // Tampilkan modal
+//         })
+//         .catch((error) => {
+//             console.error('Error accessing webcam: ', error);
+//         });
+//     });
+// });
+
+// Event listener untuk tombol Open Camera
 document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) => {
     button.addEventListener('click', () => {
         const video = document.getElementById('cameraView');
@@ -59,9 +83,13 @@ document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) =>
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
 
-        navigator.mediaDevices.getUserMedia({
-            video: true
-        })
+        const constraints = {
+            video: {
+                facingMode: 'environment' // 'environment' digunakan untuk kamera belakang
+            }
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints)
         .then((stream) => {
             video.srcObject = stream;
             video.play();
@@ -73,6 +101,7 @@ document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) =>
         });
     });
 });
+
 
 function stopCamera() {
     const video = document.getElementById('cameraView');

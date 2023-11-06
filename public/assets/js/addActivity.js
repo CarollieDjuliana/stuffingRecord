@@ -78,7 +78,7 @@ document.getElementById("submit").onclick = function () {
   // Menyimpan data ke Firebase Realtime Database
   set(dataRef, dataToSave)
     .then(() => {
-      alert("Data Inserted");
+      // alert("Data Inserted");
       document.getElementById("shipper").value = "";
       document.getElementById("no_booking").value = "";
       document.getElementById("term").value = "";
@@ -118,7 +118,7 @@ document.getElementById("submit").onclick = function () {
         // Menyimpan data form container ke Firebase Realtime Database
         set(ref(db, containerDataPath), containerDataToSave)
           .then(() => {
-            alert("Data Form Container Inserted");
+            // alert("Data Form Container Inserted");
           })
           .catch((error) => {
             console.error("Error saving data: ", error);
