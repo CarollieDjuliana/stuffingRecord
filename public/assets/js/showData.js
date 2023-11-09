@@ -1,21 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 import { getStorage, listAll, getDownloadURL, ref as storageRef } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+import { firebaseApp } from './fireConfig.js';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDWnzARzRIX5eb4q3A0tDwb_4iSmZ5EHTY",
-    authDomain: "stuffingrecord-mkj.firebaseapp.com",
-    databaseURL: "https://stuffingrecord-mkj-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "stuffingrecord-mkj",
-    storageBucket: "stuffingrecord-mkj.appspot.com",
-    messagingSenderId: "515562362541",
-    appId: "1:515562362541:web:f692bb65ef317963765824",
-    measurementId: "G-4GEZPYYPS5"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const storage = getStorage(app);
+const db = getDatabase(firebaseApp);
+const storage = getStorage(firebaseApp);
 
 const shipper = new URLSearchParams(window.location.search).get("shipper");
 const no_booking = new URLSearchParams(window.location.search).get("no_booking");
@@ -104,7 +92,7 @@ async function displayPhotos(photoList, folderName) {
         // Tampilkan judul containerNumber hanya sekali di atas
         photosHTML += `
             <div class="col-md-12 mb-3">
-                <h3>${containerNumber}</h3>
+                <h6>${containerNumber}</h6>
             </div>
         `;
 

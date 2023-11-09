@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group mt-2">
                         <label for="edited-quantity">Quantity</label>
-                        <input type="number" class="form-control" id="edited-quantity" placeholder="Quantity">
+                        <input type="text" class="form-control" id="edited-quantity" placeholder="Quantity">
                     </div>
                     <div class="form-group mt-2">
                         <label for="edited-grade">Grade</label>

@@ -19,8 +19,7 @@
 
             <!-- add activity button -->
             <div class="me-auto">
-                <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end text-sm"
-                    onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
+                <button type="button" id="add_activity" class="btn btn-warning fw-bold float-end text-sm" onclick="window.location.href = '/addActivity'">ADD ACTIVITY</button>
             </div>
         </div>
     </div>

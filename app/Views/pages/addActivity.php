@@ -18,8 +18,12 @@
                 </div>
                 <div class="col-md-6">
                     <label for="term" class="form-label mt-3">TERM</label>
-                    <input type="text" class="form-control" id="term" name="term" value="CFS/CY" required>
+                    <select class="form-select" id="term" name="term" required>
+                        <option selected value="CFS/CY">CFS/CY</option>
+                        <option value="CY/CY">CY/CY</option>
+                    </select>
                 </div>
+
                 <div class="col-md-6">
                     <label for="comodity" class="form-label mt-3">COMODITY</label>
                     <input type="text" class="form-control" id="comodity" name="comodity" value="RUBBER" required>
@@ -66,15 +70,9 @@
                 </div>
                 <div class="col-md-6">
                     <label for="location" class="form-label mt-3">LOCATION</label>
-                    <select id="location" class="form-select" name="location" required>
-                        <option selected>UTPK</option>
-                        <option>DEPO INTIRUP</option>
-                        <option>GUI KUTO</option>
-                        <option>PTP</option>
-                        <option>DEPO BRP</option>
-                        <option value="other">Other</option>
-                    </select>
+                    <input type="text" class="form-control" id="location" name="location" value="UTPK" required>
                 </div>
+
                 <div class="col-md-6" id="otherLocationContainer" style="display: none;">
                     <label for="other_location" class="form-label mt-3">Other Location</label>
                     <input type="text" class="form-control" id="other_location" name="other_location">

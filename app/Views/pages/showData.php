@@ -11,7 +11,7 @@
         border-collapse: collapse;
         width: 100%;
         border: 1px solid #ddd;
-        font-size: 18%;
+        font-size: 12px;
     }
 
     .table-container {
@@ -58,7 +58,7 @@
 
     table.bottom td,
     table.bottom th {
-        font-size: 40%;
+        font-size: 12px;
         padding: 3px;
         background-color: transparent;
         border: none;
@@ -80,7 +80,7 @@
         }
 
         @page {
-            size: landscape;
+            size: A4 landscape;
         }
 
         button {
@@ -103,10 +103,6 @@
 
         }
 
-        /* @page {
-            margin: 5px auto;
-        } */
-
         @top-left {
             content: none;
         }
@@ -128,7 +124,7 @@
         }
 
         p {
-            text-align: left;
+            text-align: center;
         }
 
         .documentation {
@@ -349,7 +345,7 @@
                 </tbody>
             </table>
         </div>
-        <p>JUDGEMENT CAN BE : YES/NO/ACTION</p>
+        <p style="text-align: left;">JUDGEMENT CAN BE : YES/NO/ACTION</p>
     </div>
     <div class="section">
         <div class="table-container  table-responsive">
