@@ -180,7 +180,7 @@
                 <tr>
                     <th>COMMODITY</th>
                     <td>:</td>
-                    <td id="comodity"></td>
+                    <td id="commodity"></td>
                 </tr>
 
                 <tr>

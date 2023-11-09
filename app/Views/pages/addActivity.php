@@ -25,8 +25,8 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="comodity" class="form-label mt-3">COMODITY</label>
-                    <input type="text" class="form-control" id="comodity" name="comodity" value="RUBBER" required>
+                    <label for="commodity" class="form-label mt-3">COMMODITY</label>
+                    <input type="text" class="form-control" id="commodity" name="commodity" value="RUBBER" required>
                 </div>
                 <div class="col-md-6">
                     <label for="quantity" class="form-label mt-3">QUANTITY</label>
@@ -134,7 +134,7 @@
     // Function to save data from the first page
     function saveData() {
         const formElements = [
-            'shipper', 'no_booking', 'quantity', 'date', 'term', 'comodity', 'grade',
+            'shipper', 'no_booking', 'quantity', 'date', 'term', 'commodity', 'grade',
             'shipping_line', 'vessel_name', 'voyage', 'port_of_loading', 'destination',
             'etd', 'stuffing_place', 'stuffing_by', 'location', 'weather'
         ];

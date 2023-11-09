@@ -2,7 +2,7 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.10.0
 import { firebaseApp } from './fireConfig.js';
 
 document.addEventListener("DOMContentLoaded", function () {
-  var shipperV, no_bookingV, termV, comodityV, quantityV, gradeV, shipping_lineV, vassel_nameV, voyageV, port_of_loadingV, destinationV, etdV, stuffing_placeV, stuffing_byV, locationV, weatherV;
+  var shipperV, no_bookingV, termV, commodityV, quantityV, gradeV, shipping_lineV, vassel_nameV, voyageV, port_of_loadingV, destinationV, etdV, stuffing_placeV, stuffing_byV, locationV, weatherV;
 
   // Simpan data container ke dalam array
   var containerData = [];
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     shipperV = document.getElementById("shipper").value;
     no_bookingV = document.getElementById("no_booking").value;
     termV = document.getElementById("term").value;
-    comodityV = document.getElementById("comodity").value;
+    commodityV = document.getElementById("commodity").value;
     quantityV = document.getElementById("quantity").value;
     gradeV = document.getElementById("grade").value;
     shipping_lineV = document.getElementById("shipping_line").value;
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    console.log(shipperV, no_bookingV, termV, comodityV, quantityV, gradeV, shipping_lineV, vassel_nameV, voyageV, port_of_loadingV, destinationV, etdV, stuffing_placeV, stuffing_byV, locationV, weatherV);
+    console.log(shipperV, no_bookingV, termV, commodityV, quantityV, gradeV, shipping_lineV, vassel_nameV, voyageV, port_of_loadingV, destinationV, etdV, stuffing_placeV, stuffing_byV, locationV, weatherV);
     console.log(containerData);
   }
 
@@ -50,8 +50,25 @@ document.getElementById("submit").onclick = function () {
   // Mendapatkan referensi ke Firebase Realtime Database
   const db = getDatabase(firebaseApp);
 
+//pengkondisian node database
+  var noBookingWithoutSymbol = "";
+// Periksa apakah nomor booking mengandung simbol '/'
+if (no_bookingV.includes('/')) {
+  // Jika iya, ambil bagian sebelum simbol '/'
+  const parts = no_bookingV.split('/');
+  const noBookingWithoutSymbol = parts[0];
+  console.log("Nomor Booking tanpa simbol '/':", noBookingWithoutSymbol);
+} else {
+  // Jika tidak, gunakan nomor booking asli
+  console.log("Nomor Booking asli:", no_bookingV);
+}
+
+const sanitizedShipperV = shipperV.replace(/[.\s#\$[\]]/g, ' ');
+// const sanitizedShipperV = encodeURIComponent(shipperV);
+
+
   // Mendefinisikan path untuk data
-  const dataPath = "activity/" + shipperV + "/" + no_bookingV;
+  const dataPath = "activity/" + sanitizedShipperV + "/" + noBookingWithoutSymbol;
   const dataRef = ref(db, dataPath);
 
   // Data yang akan disimpan di database
@@ -59,7 +76,7 @@ document.getElementById("submit").onclick = function () {
     shipper: shipperV,
     no_booking: no_bookingV,
     term: termV,
-    comodity: comodityV,
+    commodity: commodityV,
     quantity: quantityV,
     grade: gradeV,
     shipping_line: shipping_lineV,
@@ -82,7 +99,7 @@ document.getElementById("submit").onclick = function () {
       document.getElementById("shipper").value = "";
       document.getElementById("no_booking").value = "";
       document.getElementById("term").value = "";
-      document.getElementById("comodity").value = "";
+      document.getElementById("commodity").value = "";
       document.getElementById("quantity").value = "";
       document.getElementById("grade").value = "";
       document.getElementById("shipping_line").value = "";

@@ -20,7 +20,7 @@ get(dataRef)
             document.getElementById("no_booking").textContent = data.no_booking;
             document.getElementById("shipper").textContent = data.shipper;
             document.getElementById("term").textContent = data.term;
-            document.getElementById("comodity").textContent = data.comodity;
+            document.getElementById("commodity").textContent = data.commodity;
             document.getElementById("quantity").textContent = data.quantity;
             document.getElementById("grade").textContent = data.grade;
             document.getElementById("shipping_line").textContent = data.shipping_line;

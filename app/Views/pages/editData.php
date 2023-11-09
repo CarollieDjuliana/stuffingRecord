@@ -214,11 +214,13 @@
             const editedContainerData = {};
 
             for (let i = 0; i < editedContainers.length; i++) {
-                const containerNumber = editedContainers[i].value;
+                // const containerNumber = editedContainers[i].value;
+                const containerNumber = document.getElementsByName("edited-container-number")[i].value;
                 const sealNumber = document.getElementsByName("edited-seal-number")[i].value;
                 const stuffingDate = document.getElementsByName("edited-stuffing-date")[i].value;
 
                 editedContainerData[containerNumber] = {
+                    container_number: containerNumber,
                     seal_number: sealNumber,
                     stuffing_date: stuffingDate,
                 };

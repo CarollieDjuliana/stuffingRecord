@@ -35,8 +35,23 @@
     } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
 
     const dataForm1 = JSON.parse(localStorage.getItem('dataForm1'));
-    const shipperV = dataForm1.shipper;
-    const noBookingV = dataForm1.no_booking;
+
+    //pengkondisian node database
+    var noBookingWithoutSymbol = "";
+    // Periksa apakah nomor booking mengandung simbol '/'
+    if (dataForm1.no_booking.includes('/')) {
+        // Jika iya, ambil bagian sebelum simbol '/'
+        const parts = dataForm1.no_booking.split('/');
+        noBookingWithoutSymbol = parts[0];
+        console.log("Nomor Booking tanpa simbol '/':", noBookingWithoutSymbol);
+    } else {
+        // Jika tidak, gunakan nomor booking asli
+        console.log("Nomor Booking asli:", dataForm1.no_booking);
+        noBookingWithoutSymbol = dataForm1.no_booking;
+    }
+
+    const sanitizedShipperV = dataForm1.shipper.replace(/[.\s#\$[\]]/g, ' ');
+    // const sanitizedShipperV = encodeURIComponent(shipperV);
     const quantityV = dataForm1.quantity;
     var pattern = /(\d+)D/;
     console.log(dataForm1);
@@ -122,7 +137,8 @@
 
             const app = initializeApp(firebaseConfig);
             const db = getDatabase();
-            const dataPath = "activity/" + shipperV + "/" + noBookingV; // Perubahan jalur
+            // Mendefinisikan path untuk data
+            const dataPath = "activity/" + sanitizedShipperV + "/" + noBookingWithoutSymbol;
 
             const form1 = {
                 ...dataForm1,
@@ -138,7 +154,7 @@
                     console.error("Error saving data: ", error);
                 });
 
-            const dataPathContainer = "activity/" + shipperV + "/" + noBookingV + "/container_data"; // Perubahan jalur
+            const dataPathContainer = "activity/" + sanitizedShipperV + "/" + noBookingWithoutSymbol + "/container_data"; // Perubahan jalur
 
             set(ref(db, dataPathContainer), dataToSave)
                 .then(() => {
