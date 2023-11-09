@@ -78,7 +78,7 @@ onValue(sortedActivityQuery, (snapshot) => {
   }
 }, (error) => {
   console.error("Error reading data: ", error);
-});s
+});
 
 // Fungsi untuk mengurutkan data berdasarkan tanggal terbaru
 function sortDataByDate(activityData) {
