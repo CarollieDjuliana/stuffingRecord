@@ -19,6 +19,8 @@ get(dataRef)
             // Menggunakan nilai-nilai variabel untuk menyusun HTML
             document.getElementById("no_booking").textContent = data.no_booking;
             document.getElementById("shipper").textContent = data.shipper;
+            document.getElementById("shipper2").textContent = data.shipper;
+            document.getElementById("shipper3").textContent = data.shipper;
             document.getElementById("term").textContent = data.term;
             document.getElementById("commodity").textContent = data.commodity;
             document.getElementById("quantity").textContent = data.quantity;
@@ -33,6 +35,7 @@ get(dataRef)
             document.getElementById("stuffing_by").textContent = data.stuffing_by;
             document.getElementById("location").textContent = data.location;
             document.getElementById("weather").textContent = data.weather;
+            document.getElementById("inspected_by").textContent = data.inspected_by;
 
 
  // Mencetak data kontainer untuk setiap kontainer dalam data.container_data

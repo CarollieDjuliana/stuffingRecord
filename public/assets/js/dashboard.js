@@ -41,9 +41,9 @@ onValue(sortedActivityQuery, (snapshot) => {
               // Tambahkan tautan "Edit Container 1" ke dalam tabel
               tableHTML += `
                 <tr>
-                  <td>${date.toLocaleDateString('id-ID')}</td>
-                  <td>${shipperKey}</td>
-                  <td>${noBookingKey}</td>
+                <td style="text-align: left;">${date.toLocaleDateString('id-ID')}</td>
+                <td style="text-align: left;">${shipperKey}</td>
+                <td style="text-align: left;">${noBookingKey}</td>
                   <td>${lokasi}</td>
                   <td>${status}</td>
                   <td><a href="addData?shipper=${shipperKey}&no_booking=${noBookingKey}&container=${containerKey}" class="btn btn-primary">Edit</a></td>

@@ -50,19 +50,6 @@ function captureImage(index, video) {
     selectedImage.style.display = 'none';
 }
 
-// document.addEventListener('DOMContentLoaded', function () {
-//     const existingImageCaptured = localStorage.getItem('imageCaptured');
-
-//     if (existingImageCaptured === 'true') {
-//         // Tampilkan konfirmasi untuk mengganti gambar
-//         const confirmChange = window.confirm('Apakah Anda ingin mengganti foto sebelumnya?');
-//         if (!confirmChange) {
-//             // Batalkan akses kamera jika pengguna memilih untuk tidak mengganti foto
-//             return;
-//         }
-//     }
-// });
-
 
 // Event listener untuk tombol Open Camera
 document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) => {
@@ -78,28 +65,6 @@ document.querySelectorAll('[id^="openCameraButton"]').forEach((button, index) =>
                 facingMode: 'environment' // 'environment' digunakan untuk kamera belakang
             }
         };
-
-        const existingImageCaptured = localStorage.getItem('imageCaptured' + index);
-
-        if (existingImageCaptured === 'true') {
-            // Tampilkan konfirmasi untuk mengganti gambar
-            const confirmChange = window.confirm('Apakah Anda ingin mengganti foto sebelumnya?');
-            if (!confirmChange) {
-                // Batalkan akses kamera jika pengguna memilih untuk tidak mengganti foto
-                return;
-            }
-        }
-        
-
-            // // Cek apakah ada gambar yang sudah diupload sebelumnya
-            // const existingImage = document.getElementById('uploadedImage' + index);
-            // if (existingImage && existingImage.src) {
-            //     // Tampilkan konfirmasi untuk mengganti gambar
-            //     const confirmChange = window.confirm('Apakah Anda ingin mengganti foto sebelumnya?');
-            //     if (!confirmChange) {
-            //         return; // Batalkan akses kamera jika pengguna memilih untuk tidak mengganti foto
-            //     }
-            // }
 
         navigator.mediaDevices.getUserMedia(constraints)
         .then((stream) => {
@@ -136,6 +101,7 @@ document.getElementById('captureButton').addEventListener('click', () => {
     const index = document.getElementById('cameraView').getAttribute('data-index'); // Ambil indeks form yang aktif
     const video = document.getElementById('cameraView');
     captureImage(index, video);
+
     
     $('#cameraModal').modal('hide'); // Tutup modal ketika capture
     stopCamera(); // Hentikan stream media saat modal ditutup
@@ -154,18 +120,7 @@ document.getElementById('closeButton_x').addEventListener('click', () => {
 // Event listener untuk input file
 document.querySelectorAll('[id^="fileInput"]').forEach((fileInput, index) => {
     fileInput.addEventListener('change', (event) => {
-         // Cek apakah ada gambar yang sudah diupload sebelumnya
-         const existingImage = document.getElementById('uploadedImage' + index);
-         const selectedImage = document.getElementById('selectedImage' + index);
-        // Check if there is an existing image displayed
-        if (existingImage && existingImage.src) {
-            // Tampilkan konfirmasi untuk mengganti gambar
-            const confirmChange = window.confirm('Apakah Anda ingin mengganti foto sebelumnya?');
-            if (!confirmChange) {
-                event.preventDefault(); // Batalkan pilihan file jika pengguna memilih untuk tidak mengganti foto
-                return;
-            }
-        }
+        const selectedImage = document.getElementById('selectedImage' + index);
         const capturedImage = document.getElementById('capturedImage' + index);
         const file = event.target.files[0];
 
@@ -235,10 +190,6 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
         if (fileToUpload) {
             const imageName = uploadButton.name + ' - ' + shipper + ' - ' + no_booking + '.jpg';
             console.log(imageName);
-
-           // Setelah mengambil gambar, simpan statusnya ke dalam localStorage
-            localStorage.setItem('imageCaptured' + index, true);
-            
             // Definisikan path penyimpanan di Firebase Storage
             const storageRef = ref(storage, 'images/'+ shipper +'/'+ no_booking +'/'+ container+ '/'+ imageName);
 
@@ -267,7 +218,6 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
                     .then((url) => {
                         // Tampilkan gambar yang diupload di tempat preview
                         uploadedImage.src = url;
-                        
                         const photoList = document.getElementById('photoList' + index);
                         displayPhotos(photoList, index);
                     })
@@ -297,22 +247,7 @@ document.querySelectorAll('[id^="uploadButton"]').forEach((uploadButton, index) 
             successfullyFetchedPhotos += 1;
             console.log(`Foto yang berhasil diambil: ${successfullyFetchedPhotos}`);
             updateDisplayRatio();
-
-            if (successfullyFetchedPhotos === totalPhotos) {
-                enableCloseActivityButton(); // Panggil fungsi untuk mengaktifkan tombol "Close Activity"
-              }
         }
-
-        function enableCloseActivityButton() {
-            // Gantilah 'namaTombolCloseActivity' dengan ID atau kelas yang sesuai dengan tombol "Close Activity" Anda
-            const closeButton = document.getElementById('namaTombolCloseActivity');
-          
-            // Aktifkan tombol "Close Activity"
-            closeButton.disabled = false;
-          
-            // Tambahkan event listener untuk menangani penutupan aktivitas
-            closeButton.addEventListener('click', closeActivity);
-          }
 
         // Fungsi untuk memperbarui tampilan rasio
         function updateDisplayRatio() {

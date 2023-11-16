@@ -2,22 +2,22 @@
 
 <?= $this->section('content'); ?>
 <style>
-.bg-custom {
-    background-color: #fdb913;
-}
+    .bg-custom {
+        background-color: #fdb913;
+    }
 
-body {
+    body {
 
-    /* Gunakan URL gambar sebagai nilai background-image */
-    background-image: url("assets/images/SI_background.jpg");
-    /* Properti CSS lainnya untuk mengatur latar belakang */
-    background-size: cover;
-    /* Sesuaikan gambar agar mengisi seluruh area */
-    background-repeat: no-repeat;
-    /* Hindari pengulangan gambar */
-    background-attachment: fixed;
+        /* Gunakan URL gambar sebagai nilai background-image */
+        background-image: url("assets/images/SI_background.jpg");
+        /* Properti CSS lainnya untuk mengatur latar belakang */
+        background-size: cover;
+        /* Sesuaikan gambar agar mengisi seluruh area */
+        background-repeat: no-repeat;
+        /* Hindari pengulangan gambar */
+        background-attachment: fixed;
 
-}
+    }
 </style>
 
 <body>
@@ -29,8 +29,7 @@ body {
             <div class="card mb-3 p-md-3" style="width: 36rem;">
                 <div class="card-body">
                     <h6 class="card-title text-center ">LOGIN<br>STUFFING RECORD <br>PT. MUSI KALIJAYA</h6>
-                    <form name="login_form" id="login_form" method="post" action="Pages/dashboard"
-                        enctype="multipart/form-data">
+                    <form name="login_form" id="login_form" method="post" action="Pages/dashboard" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="login_email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="login_email" aria-describedby="emailHelp">
@@ -58,8 +57,7 @@ body {
     </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
 </script>
 <!-- <script type="module" src=""></script>
 <script type="module" src=""></script> -->

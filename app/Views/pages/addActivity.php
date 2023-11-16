@@ -85,6 +85,10 @@
                         <option>Bad</option>
                     </select>
                 </div>
+                <div class="col-md-6">
+                    <label for="inspected_by" class="form-label mt-3">INSPECTED BY</label>
+                    <input type="text" class="form-control" id="inspected_by" name="inspected_by" value="-" required>
+                </div>
             </div>
         </form>
 
@@ -136,7 +140,7 @@
         const formElements = [
             'shipper', 'no_booking', 'quantity', 'date', 'term', 'commodity', 'grade',
             'shipping_line', 'vessel_name', 'voyage', 'port_of_loading', 'destination',
-            'etd', 'stuffing_place', 'stuffing_by', 'location', 'weather'
+            'etd', 'stuffing_place', 'stuffing_by', 'location', 'weather', 'inspected_by'
         ];
 
         const formData = {};

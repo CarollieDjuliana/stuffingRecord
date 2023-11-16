@@ -72,6 +72,10 @@
                         <label for="edited-weather">Weather</label>
                         <input type="text" class="form-control" id="edited-weather" placeholder="Weather">
                     </div>
+                    <div class="form-group mt-2">
+                        <label for="edited-inspected-by">Inspected By</label>
+                        <input type="text" class="form-control" id="edited-inspected-by" placeholder="Inspected By">
+                    </div>
                 </form>
             </div>
             <div class="col-md-6">
@@ -146,6 +150,7 @@
                     document.getElementById("edited-stuffing-by").value = data.stuffing_by;
                     document.getElementById("edited-location").value = data.location;
                     document.getElementById("edited-weather").value = data.weather;
+                    document.getElementById("edited-inspected-by").value = data.inspected_by;
 
                     const containerData = data.container_data;
 
@@ -206,6 +211,7 @@
                 stuffing_by: document.getElementById("edited-stuffing-by").value,
                 location: document.getElementById("edited-location").value,
                 weather: document.getElementById("edited-weather").value,
+                inspected_by: document.getElementById("edited-inspected-by").value,
                 container_data: {},
             };
 

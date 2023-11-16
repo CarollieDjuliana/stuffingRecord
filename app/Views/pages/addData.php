@@ -79,6 +79,7 @@ function form_foto($container_fill, $index)
     <div class="content-upper mt-4">
         <h6>
             <div id="shipper"></div>
+            <div id="no_booking"></div>
         </h6>
         <div class="row">
             <div class="col-8">
@@ -113,15 +114,15 @@ function form_foto($container_fill, $index)
             <!-- <div id="uploadedImage0"></div> -->
         </div>
         <div class="row">
-            <?= form_foto("QUARTER FILL CONTAINER", 1); ?>
+            <?= form_foto("HALF FILL CONTAINER", 1); ?>
             <!-- <div id="uploadedImage1"></div> -->
         </div>
         <div class="row">
-            <?= form_foto("HALF FILL CONTAINER", 2); ?>
+            <?= form_foto("CONTAINER FULL", 2); ?>
             <!-- <div id="uploadedImage2"></div> -->
         </div>
         <div class="row">
-            <?= form_foto("CONTAINER FULL", 3); ?>
+            <?= form_foto("HALF CLOSED CONTAINER", 3); ?>
             <!-- <div id="uploadedImage3"></div> -->
         </div>
         <div class="row">

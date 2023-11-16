@@ -9,7 +9,7 @@
         border-collapse: collapse;
         border-collapse: collapse;
         border: 1px solid #ddd;
-        font-size: 10px;
+        font-size: 12px;
     }
 
     .table-container {
@@ -26,7 +26,6 @@
         word-wrap: break-word;
         white-space: nowrap;
         width: 50px;
-        text-overflow: ellipsis;
         /* Set a fixed width for cells */
     }
 
@@ -38,29 +37,16 @@
 
     table.tg td,
     table.tg th {
-        text-align: left;
+        text-align: center;
         white-space: nowrap;
         word-wrap: break-word;
         /* Tetapkan nowrap untuk mencegah pemutaran otomatis */
-        font-size: 10px;
-        padding: 4px;
-    }
-
-    table.claim td,
-    table.claim th {
-        text-align: left;
-        white-space: nowrap;
-        word-wrap: break-word;
         font-size: 45%;
         padding: 4px;
-        width: 5%;
-        /* Adjust the width as needed */
     }
 
-
-
     p {
-        font-size: 10px;
+        font-size: 50%;
         padding: 4px;
         margin: 5px;
     }
@@ -71,7 +57,7 @@
 
     table.bottom td,
     table.bottom th {
-        font-size: 10px;
+        font-size: 12px;
         padding: 3px;
         background-color: transparent;
         border: none;
@@ -82,7 +68,7 @@
         border: none;
     }
 
-    .section_ {
+    .section {
         padding: 0px;
     }
 
@@ -94,27 +80,6 @@
 
         @page {
             size: A4 landscape;
-        }
-
-        @page :first {
-            @top-center {
-                content: "Your Header Content Here";
-                font-size: 12px;
-                /* Adjust font size as needed */
-            }
-        }
-
-        @page {
-            @top-center {
-                content: "Your Header Content Here";
-                font-size: 12px;
-                /* Adjust font size as needed */
-            }
-        }
-
-        .section {
-            margin-top: 100px;
-            /* Add margin for sections on new pages */
         }
 
         button {
@@ -134,7 +99,7 @@
         body {
             text-align: center;
             margin: auto;
-            /* font-size: 10px; */
+            font-size: 12px;
 
         }
 
@@ -147,27 +112,16 @@
             position: fixed;
             top: 10px;
             left: 10px;
-            margin: 50px;
         }
 
-
-        /* table.tg td,
+        table.tg td,
         table.tg th {
             text-align: left;
             white-space: nowrap;
             word-wrap: break-word;
-            font-size: 10px;
-            padding: 4px;
-        } */
-
-        table.claim th,
-        table.claim td {
-            font-size: 45%;
-            /* Adjust font size for print mode */
-            word-wrap: break-word;
-            /* Ensure word-wrap in print mode */
-            width: 5%;
-            /* Adjust the width as needed */
+            font-size: 40%;
+            font-size: auto;
+            padding: 3px;
         }
 
         p {
@@ -208,7 +162,7 @@
     <!-- Header/Kop -->
     <div class="header">
         <img style="width: 28%" src="/assets/images/logoWithText.png">
-        <p style="font-size: 12px;">STUFFING INSPECTION RECORD <br> PT. MUSI KALIJAYA PALEMBANG
+        <p style="font-size: 80%;">STUFFING INSPECTION RECORD <br> PT. MUSI KALIJAYA PALEMBANG
         </p>
     </div>
 
@@ -216,7 +170,7 @@
     <hr>
 
 
-    <div class="section_">
+    <div class="section">
         <div class="table-container  table-responsive">
             <table class="tg">
                 <tr>
@@ -310,8 +264,8 @@
     </div>
 
 
-    <div class="section_">
-        <h6 style="text-align: center;font-size: 10px;">RUBBER CONDITION AT RECEIVING</h6>
+    <div class="section">
+        <h6 style="text-align: center; font-size: 80%;">RUBBER CONDITION AT RECEIVING</h6>
         <div class="table-container  table-responsive">
             <table class="tg">
                 <tr>
@@ -359,45 +313,44 @@
         </div>
     </div>
 
-    <div class="section_">
+    <div class="section">
         <div class=" table-container table-responsive">
-            <table class="claim">
-                <thead>
-                    <tr>
-                        <th rowspan="3">CONTAINER <br> NUMBER</th>
-                        <th rowspan="3">SEAL <br> NUMBER</th>
-                        <th rowspan="3">STUFFING <br> DATE</th>
-                        <th colspan="18">ITEM</th>
-                    </tr>
-                    <tr>
-                        <th colspan="2">CEILING</th>
-                        <th colspan="2">WALLS</th>
-                        <th colspan="3">RIGHT SIDE</th>
-                        <th colspan="3">LEFT SIDE</th>
-                        <th colspan="3">FLOOR</th>
-                        <th colspan="2">DOOR</th>
-                        <th colspan="3">CLEANLINESS</th>
-                    </tr>
-                    <tr>
-                        <th>HOLES</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>HOLES</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>HOLES /<br> CRACK /<br> DAMAGE</th>
-                        <th>LOSEN <br> SCREW /<br> BOLT</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>HOLES /<br> CRACK /<br> DAMAGE</th>
-                        <th>LOSEN <br> SCREW /<br> BOLT</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>HOLES /<br> CRACK /<br> DAMAGE</th>
-                        <th>LOSEN SCREW /<br> BOLT</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>RUBBER <br>SEAL BROKEN</th>
-                        <th>RUSTY /<br> CORROSION</th>
-                        <th>WOODEN <br> CHIPS /<br> SPLINTER</th>
-                        <th>PLASTIC <br>RESIN,<br> ETC</th>
-                        <th>WET,<br> OIL <br> STAINS</th>
-                    </tr>
+            <table class="tg">
+                <tr>
+                    <th rowspan="3">CONTAINER <br> NUMBER</th>
+                    <th rowspan="3">SEAL <br> NUMBER</th>
+                    <th rowspan="3">STUFFING <br> DATE</th>
+                    <th colspan="18">ITEM</th>
+                </tr>
+                <tr>
+                    <th colspan="2">CEILING</th>
+                    <th colspan="2">WALLS</th>
+                    <th colspan="3">RIGHT SIDE</th>
+                    <th colspan="3">LEFT SIDE</th>
+                    <th colspan="3">FLOOR</th>
+                    <th colspan="2">DOOR</th>
+                    <th colspan="3">CLEANLINESS</th>
+                </tr>
+                <tr>
+                    <th> HOLES</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>HOLES /<br> CRACK /<br> DAMAGE</th>
+                    <th>LOSEN SCREW /<br> BOLT</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>RUBBER <br>SEAL BROKEN</th>
+                    <th>RUSTY /<br> CORROSION</th>
+                    <th>WOODEN CHIPS /<br> SPLINTER</th>
+                    <th>PLASTIC RESIN,<br> ETC</th>
+                    <th>WET,<br> OIL STAINS</th>
+                </tr>
                 </thead>
                 <tbody id="containerDataContainer">
                     <!-- <div id="containerDataContainer"> -->
@@ -406,7 +359,7 @@
         </div>
         <p style="text-align: left;">JUDGEMENT CAN BE : YES/NO/ACTION</p>
     </div>
-    <div class="section_">
+    <div class="section">
         <div class="table-container  table-responsive">
             <table class="bottom">
                 <tr>
@@ -452,7 +405,7 @@
     </div>
 
 
-    <div class="section_">
+    <div class="section">
         <div class="documentation">
             <div class="container">
                 <h5>Dokumentasi</h5>

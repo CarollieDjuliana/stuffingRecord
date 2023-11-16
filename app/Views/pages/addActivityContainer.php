@@ -53,7 +53,7 @@
     const sanitizedShipperV = dataForm1.shipper.replace(/[.\s#\$[\]]/g, ' ');
     // const sanitizedShipperV = encodeURIComponent(shipperV);
     const quantityV = dataForm1.quantity;
-    var pattern = /(\d+)D/;
+    var pattern = /(\d+)D/i;
     console.log(dataForm1);
 
 
@@ -110,9 +110,9 @@
             var containerData = {};
 
             for (var i = 1; i <= numContainers; i++) {
-                var containerNumValue = document.getElementById(`container_num_${i}`).value;
-                var sealNumValue = document.getElementById(`seal_number_${i}`).value;
-                var stuffingDateValue = document.getElementById(`stuffing_date_${i}`).value;
+                var containerNumValue = document.getElementById(`container_num_${i}`).value.toUpperCase();
+                var sealNumValue = document.getElementById(`seal_number_${i}`).value.toUpperCase();
+                var stuffingDateValue = document.getElementById(`stuffing_date_${i}`).value.toUpperCase();
 
                 // Mengubah nama properti sesuai yang diinginkan
                 containerData[containerNumValue] = {
@@ -140,13 +140,19 @@
             // Mendefinisikan path untuk data
             const dataPath = "activity/" + sanitizedShipperV + "/" + noBookingWithoutSymbol;
 
+            // Mengonversi seluruh properti di objek menjadi huruf kapital
+            for (const key in dataForm1) {
+                if (Object.hasOwnProperty.call(dataForm1, key)) {
+                    dataForm1[key] = dataForm1[key].toUpperCase();
+                }
+            }
             const form1 = {
                 ...dataForm1,
                 status: "ON PROGRESS"
             };
             set(ref(db, dataPath), form1)
                 .then(() => {
-                    alert("Data Inserted");
+                    // alert("Data Inserted");
                     localStorage.removeItem('dataForm1');
                     window.location.href = "/dashboard";
                 })

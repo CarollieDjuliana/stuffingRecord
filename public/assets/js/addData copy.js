@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Data exists:", data);
             
                 // Menggunakan nilai-nilai variabel untuk menyusun HTML
-                document.getElementById("shipper").textContent = shipper;  
-                document.getElementById("no_booking").textContent = no_booking;  
+                document.getElementById("shipper").textContent = shipper;   
                 document.getElementById("container_number").textContent = data.container_number;        
                 document.getElementById("seal_number").textContent = data.seal_number;
                 document.getElementById("stuffing_date").textContent = data.stuffing_date;
@@ -81,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Inisialisasi string template untuk baris-baris tabel
       let tableHTML = '';
+
+
       // Dapatkan `no_booking` dari URL saat ini
       const currentNoBooking = new URLSearchParams(window.location.search).get("no_booking");
 
