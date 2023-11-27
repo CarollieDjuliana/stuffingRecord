@@ -41,12 +41,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    // Meng-handle klik tombol "Close This Activity"
-    document.getElementById("closeActivityButton").addEventListener("click", function () {
-      // Menampilkan modal konfirmasi
-      const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-      confirmationModal.show();
+    // // Meng-handle klik tombol "Close This Activity"
+    // document.getElementById("closeActivityButton").addEventListener("click", function () {
+    //   // Menampilkan modal konfirmasi
+    //   const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+    //   confirmationModal.show();
+    // });
+
+// Meng-handle klik tombol "Close This Activity"
+document.getElementById("closeActivityButton").addEventListener("click", function () {
+  // Memanggil fungsi untuk mengecek apakah semua container memiliki status "COMPLETE"
+  checkAllContainers()
+    .then((allContainersComplete) => {
+      console.log('All Containers Complete:', allContainersComplete);
+
+      if (allContainersComplete) {
+        // Menampilkan modal konfirmasi jika semua container memiliki status "COMPLETE"
+        const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+        confirmationModal.show();
+      } else {
+        // Menampilkan alert jika ada container yang belum memiliki status "COMPLETE"
+        alert('Lengkapi semua container terlebih dahulu!');
+      }
+    })
+    .catch((error) => {
+      console.error('Error checking containers:', error);
     });
+});
+
+
+// Fungsi untuk mengecek apakah semua container memiliki minimal 6 foto
+async function checkAllContainers() {
+  try {
+    // Ambil daftar container dari Firebase Storage
+    const containers = await listAll(storageRef(storage, 'images/' + shipper + '/' + no_booking));
+
+    // Iterasi melalui setiap container
+    for (const container of containers.items) {
+      // Ambil daftar foto dari setiap container
+      const photos = await listAll(container);
+      if (photos.items.length < 6) {
+        // Jika ada container yang tidak memiliki minimal 6 foto, kembalikan false
+        return false;
+      }
+    }
+
+    // Kembalikan true jika semua container memiliki minimal 6 foto
+    return true;
+  } catch (error) {
+    console.error('Error checking containers:', error);
+    return false;
+  }
+}
+
+
+
+    // Fungsi untuk menghitung jumlah foto yang sudah diupload
+    function countUploadedPhotos() {
+      const imagesFolder = 'images/' + shipper + '/' + no_booking + '/' + container;
+
+      // Ambil daftar file dari folder di Firebase Storage
+      return listAll(storageRef(storage, imagesFolder))
+          .then((result) => {
+              // Mengembalikan jumlah file dalam folder
+              return result.items.length;
+          });
+    }
+
   
     // Meng-handle klik tombol "OK" di dalam modal konfirmasi
     document.getElementById("confirmCloseButton").addEventListener("click", function () {

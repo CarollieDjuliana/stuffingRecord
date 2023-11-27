@@ -39,8 +39,18 @@ get(dataRef)
 
 
  // Mencetak data kontainer untuk setiap kontainer dalam data.container_data
+ let isFirstContainer = true; // Tambahkan variabel ini
  for (const containerNumber in data.container_data) {
     const containerData = data.container_data[containerNumber];
+    
+    // Tambahkan logika untuk mendapatkan stuffing_date dari container pertama
+    if (isFirstContainer) {
+        const stuffingDateContainer1 = document.getElementById("stuffing_date_container_1");
+        if (stuffingDateContainer1) {
+            stuffingDateContainer1.textContent = containerData.stuffing_date;
+        }
+        isFirstContainer = false;
+    }
     printContainerData(containerNumber, containerData);
 }
 } else {
@@ -94,7 +104,9 @@ async function displayPhotos(photoList, folderName) {
 
         // Tampilkan judul containerNumber hanya sekali di atas
         photosHTML += `
-            <div class="col-md-12 mb-3">
+            <div class=" page-break col-md-12 mb-3">
+            <h6>Lampiran</h6>
+            <h6 style="text-align: center;">Berikut merupakan dokumentasi dari prosess stuffing yang telah berjalan</h6>
                 <h6>${containerNumber}</h6>
             </div>
         `;

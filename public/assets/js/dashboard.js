@@ -19,6 +19,8 @@ onValue(sortedActivityQuery, (snapshot) => {
     let tableHTML = '';
     // Inisialisasi variabel isFirstContainer
     let isFirstContainer = true;
+    let stuffingDateContainer1Value = '';
+    let stuffingDateContainerValues = {};
 
     // Iterasi melalui data dan mengumpulkan baris-baris tabel
     for (const shipperKey in sortedData) {
@@ -28,7 +30,6 @@ onValue(sortedActivityQuery, (snapshot) => {
           if (shipper.hasOwnProperty(noBookingKey)) {
             const noBooking = shipper[noBookingKey];
             const lokasi = noBooking.location;
-            const date = new Date(noBooking.etd);
             const status = noBooking.status;
 
             // Ambil kunci pertama dari container_data (jika ada)
@@ -37,11 +38,18 @@ onValue(sortedActivityQuery, (snapshot) => {
               const containerKey = containerKeys[0];
               const containerData = noBooking.container_data[containerKey];
               const container_num = containerData.container_number;
+            // Tampilkan stuffing_date dari container pertama
+          if (!stuffingDateContainerValues[noBookingKey]) {
+            stuffingDateContainerValues[noBookingKey] = {};
+          }
+          if (!stuffingDateContainerValues[noBookingKey][containerKey]) {
+            stuffingDateContainerValues[noBookingKey][containerKey] = new Date(containerData.stuffing_date);
+          }
 
               // Tambahkan tautan "Edit Container 1" ke dalam tabel
               tableHTML += `
                 <tr>
-                <td style="text-align: left;">${date.toLocaleDateString('id-ID')}</td>
+                <td style="text-align: left;">${stuffingDateContainerValues[noBookingKey][containerKey].toLocaleDateString('id-ID')}</td>
                 <td style="text-align: left;">${shipperKey}</td>
                 <td style="text-align: left;">${noBookingKey}</td>
                   <td>${lokasi}</td>
@@ -50,6 +58,9 @@ onValue(sortedActivityQuery, (snapshot) => {
                   <td><a href="showData?shipper=${shipperKey}&no_booking=${noBookingKey}" class="btn btn-success">Show</a></td>
                 </tr>
               `;
+
+              
+                 
             }
           }
         }
