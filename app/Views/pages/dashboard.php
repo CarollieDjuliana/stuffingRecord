@@ -13,12 +13,12 @@
         position: sticky;
         top: 0;
         background-color: #fff;
-        z-index: 1;
+        z-index: 0;
     }
 
     input#search-focus::placeholder {
         color: #999999;
-        /* Mengatur warna placeholder menjadi lebih keabu-abuan */
+
     }
 </style>
 
