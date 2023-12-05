@@ -8,28 +8,29 @@ document.addEventListener("DOMContentLoaded", function () {
   var containerData = [];
 
   function readForm() {
-    shipperV = document.getElementById("shipper").value.toUpperCase();
-    no_bookingV = document.getElementById("no_booking").value.toUpperCase();
-    termV = document.getElementById("term").value.toUpperCase();
-    commodityV = document.getElementById("commodity").value.toUpperCase();
-    quantityV = document.getElementById("quantity").value.toUpperCase();
-    gradeV = document.getElementById("grade").value.toUpperCase();
-    shipping_lineV = document.getElementById("shipping_line").value.toUpperCase();
-    vassel_nameV = document.getElementById("vessel_name").value.toUpperCase();
-    voyageV = document.getElementById("voyage").value.toUpperCase();
-    port_of_loadingV = document.getElementById("port_of_loading").value.toUpperCase();
-    destinationV = document.getElementById("destination").value.toUpperCase();
-    etdV = document.getElementById("etd").value.toUpperCase();
-    stuffing_placeV = document.getElementById("stuffing_place").value.toUpperCase();
-    stuffing_byV = document.getElementById("stuffing_by").value.toUpperCase();
-    locationV = document.getElementById("location").value.toUpperCase();
-    weatherV = document.getElementById("weather").value.toUpperCase();
-    inspected_byV = document.getElementById("inspected_by").value.toUpperCase();
+    shipperV = document.getElementById("shipper").value;
+    no_bookingV = document.getElementById("no_booking").value;
+    termV = document.getElementById("term").value;
+    commodityV = document.getElementById("commodity").value;
+    quantityV = document.getElementById("quantity").value;
+    gradeV = document.getElementById("grade").value;
+    shipping_lineV = document.getElementById("shipping_line").value;
+    vassel_nameV = document.getElementById("vessel_name").value;
+    voyageV = document.getElementById("voyage").value;
+    port_of_loadingV = document.getElementById("port_of_loading").value;
+    destinationV = document.getElementById("destination").value;
+    etdV = document.getElementById("etd").value;
+    stuffing_placeV = document.getElementById("stuffing_place").value;
+    stuffing_byV = document.getElementById("stuffing_by").value;
+    locationV = document.getElementById("location").value;
+    weatherV = document.getElementById("weather").value;
+    inspected_byV = document.getElementById("inspected_by").value;
 
+    
     // Simpan data container ke dalam array
     for (var i = 1; i <= numInputs; i++) {
-      var containerNum = document.getElementById(`container_num_${i}`).value.toUpperCase();
-      var sealNum = document.getElementById(`seal_number_${i}`).value.toUpperCase();
+      var containerNum = document.getElementById(`container_num_${i}`).value;
+      var sealNum = document.getElementById(`seal_number_${i}`).value;
       var stuffingDate = document.getElementById(`stuffing_date_${i}`).value;
 
       // Simpan data container ke dalam array
@@ -53,18 +54,19 @@ document.getElementById("submit").onclick = function () {
 
 //pengkondisian node database
   var noBookingWithoutSymbol = "";
-  if (no_bookingV.includes('/')) {
-    // Jika iya, ambil bagian sebelum simbol '/'
-    const parts = no_bookingV.split('/');
-    noBookingWithoutSymbol = parts[0].trim(); // Gunakan parts[0] dan trim() untuk menghilangkan spasi jika ada
-    console.log("Nomor Pemesanan tanpa simbol '/':", noBookingWithoutSymbol);
-  } else {
-    // Jika tidak, gunakan nomor booking asli
-    noBookingWithoutSymbol = no_bookingV.trim(); // Gunakan no_bookingV dan trim() untuk menghilangkan spasi jika ada
-    console.log("Nomor Booking asli:", noBookingWithoutSymbol);
-  }
+// Periksa apakah nomor booking mengandung simbol '/'
+if (no_bookingV.includes('/')) {
+  // Jika iya, ambil bagian sebelum simbol '/'
+  const parts = no_bookingV.split('/');
+  noBookingWithoutSymbol = parts[0];
+  console.log("Nomor Booking tanpa simbol '/':", noBookingWithoutSymbol);
+} else {
+  // Jika tidak, gunakan nomor booking asli
+  console.log("Nomor Booking asli:", no_bookingV);
+}
 
 const sanitizedShipperV = shipperV.replace(/[.\s#\$[\]]/g, ' ');
+sanitizedShipperV = encodeURIComponent(sanitizedShipperV);
 // const sanitizedShipperV = encodeURIComponent(shipperV);
 
 

@@ -37,6 +37,10 @@
                         <input type="text" class="form-control" id="edited-shipping-line" placeholder="Shipping Line">
                     </div>
                     <div class="form-group mt-2">
+                        <label for="edited-customer">Customer</label>
+                        <input type="text" class="form-control" id="edited-customer" placeholder="Customer">
+                    </div>
+                    <div class="form-group mt-2">
                         <label for="edited-vessel-name">Vessel Name</label>
                         <input type="text" class="form-control" id="edited-vessel-name" placeholder="Vessel Name">
                     </div>
@@ -55,6 +59,10 @@
                     <div class="form-group mt-2">
                         <label for="edited-etd">ETD</label>
                         <input type="date" class="form-control" id="edited-etd" placeholder="ETD">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="edited-date" class="form-label mt-3">Stuffing Date</label>
+                        <input type="date" class="form-control" id="edited-date" placeholder="Date">
                     </div>
                     <div class="form-group mt-2">
                         <label for="edited-stuffing-place">Stuffing Place</label>
@@ -141,11 +149,13 @@
                     document.getElementById("edited-quantity").value = data.quantity;
                     document.getElementById("edited-grade").value = data.grade;
                     document.getElementById("edited-shipping-line").value = data.shipping_line;
+                    document.getElementById("edited-customer").value = data.customer;
                     document.getElementById("edited-vessel-name").value = data.vessel_name;
                     document.getElementById("edited-voyage").value = data.voyage;
                     document.getElementById("edited-port-of-loading").value = data.port_of_loading;
                     document.getElementById("edited-destination").value = data.destination;
                     document.getElementById("edited-etd").value = data.etd;
+                    document.getElementById("edited-date").value = data.date;
                     document.getElementById("edited-stuffing-place").value = data.stuffing_place;
                     document.getElementById("edited-stuffing-by").value = data.stuffing_by;
                     document.getElementById("edited-location").value = data.location;
@@ -202,11 +212,13 @@
                 quantity: document.getElementById("edited-quantity").value,
                 grade: document.getElementById("edited-grade").value,
                 shipping_line: document.getElementById("edited-shipping-line").value,
+                customer: document.getElementById("edited-customer").value,
                 vessel_name: document.getElementById("edited-vessel-name").value,
                 voyage: document.getElementById("edited-voyage").value,
                 port_of_loading: document.getElementById("edited-port-of-loading").value,
                 destination: document.getElementById("edited-destination").value,
                 etd: document.getElementById("edited-etd").value,
+                date: document.getElementById("edited-date").value,
                 stuffing_place: document.getElementById("edited-stuffing-place").value,
                 stuffing_by: document.getElementById("edited-stuffing-by").value,
                 location: document.getElementById("edited-location").value,

@@ -2,6 +2,26 @@
 
 <?= $this->section('content'); ?>
 
+<!-- CSS untuk membuat bagian head tetap -->
+<style>
+    .table-container {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
+
+    .table-container thead th {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 1;
+    }
+
+    input#search-focus::placeholder {
+        color: #999999;
+        /* Mengatur warna placeholder menjadi lebih keabu-abuan */
+    }
+</style>
+
 <body>
     <div class="container-fluid p-3">
         <div class="col-12 mb-3">
@@ -9,7 +29,7 @@
                 <!-- search bar -->
                 <div class="input-group p-3">
                     <div class="form-outline" style="flex: 1; margin-right: 10px;">
-                        <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Search">
+                        <input id="search-focus" type="search" id="form1" class="form-control" placeholder="Search by date, shipper, no booking, customer and status">
                     </div>
                     <button type="button" name="searchButton" class="btn btn-primary">
                         <i class="fas fa-search"></i>
@@ -24,18 +44,18 @@
         </div>
     </div>
     <!-- record tabel -->
-    <div class="table-responsive mt-3">
+    <div class="table-container mt-3">
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">DATE
+                    <th scope="col" style="text-align: left;">DATE
                         <button id="sort-date-button" class="btn btn-link">
                             <i class="fas fa-sort" style="color: #000000;"></i>
                         </button>
                     </th>
-                    <th scope="col">SHIPPER</th>
-                    <th scope="col">NO.BOOKING</th>
-                    <th scope="col">LOCATION</th>
+                    <th style="text-align: left;" scope="col">SHIPPER</th>
+                    <th style="text-align: left;" scope="col">NO.BOOKING</th>
+                    <th style="text-align: left;" scope="col">CUSTOMER</th>
                     <th scope="col">STATUS</th>
                     <th scope="col">UPDATE DATA</th>
                     <th scope="col">SHOW DATA</th>

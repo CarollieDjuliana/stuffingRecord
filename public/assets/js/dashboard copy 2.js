@@ -131,18 +131,14 @@ function handleSearch() {
     const dateCell = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
     const noBookingCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
     const shipperCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-    const customerCell = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-    const statusCell = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
 
     // Periksa apakah baris data cocok dengan pencarian
     const dateMatch = dateCell.includes(searchTerm);
     const noBookingMatch = noBookingCell.includes(searchTerm);
     const shipperMatch = shipperCell.includes(searchTerm);
-    const customerMatch = customerCell.includes(searchTerm);
-    const statusMatch = statusCell.includes(searchTerm);
 
     // Tampilkan atau sembunyikan baris sesuai dengan pencarian
-    if (dateMatch || noBookingMatch || shipperMatch || customerMatch || statusMatch) {
+    if (dateMatch || noBookingMatch || shipperMatch) {
       row.style.display = ''; // Tampilkan baris
     } else {
       row.style.display = 'none'; // Sembunyikan baris

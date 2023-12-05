@@ -55,6 +55,17 @@ class Pages extends BaseController
         return view('pages\dashboard');
     }
 
+    public function activity()
+    {
+        $idToken = $this->session->get('userToken');
+
+        if (!$idToken) {
+            echo "<script>alert('Harap login terlebih dahulu');</script>";
+            return view('pages\login');
+        }
+        return view('pages\activity');
+    }
+
     public function addActivity()
     {
         $idToken = $this->session->get('userToken');

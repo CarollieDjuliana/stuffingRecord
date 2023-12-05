@@ -5,7 +5,7 @@ const db = getDatabase(firebaseApp);
 
 // Referensi ke "activity"
 const activityRef = ref(db, "activity");
-const sortedActivityQuery = query(activityRef, orderByChild("date"));
+const sortedActivityQuery = query(activityRef, orderByChild("etd"));
 
 // Menggunakan onValue untuk mendengarkan perubahan data
 onValue(sortedActivityQuery, (snapshot) => {
@@ -44,7 +44,7 @@ onValue(sortedActivityQuery, (snapshot) => {
                   noBookingWithoutSymbol = parts[0];
                 } else {
                 }
-                  // Check if noBooking has container_data
+                                // Check if noBooking has container_data
                   if (noBooking.container_data && typeof noBooking.container_data === 'object') {
                     const containerKeys = Object.keys(noBooking.container_data)
                     if (containerKeys.length > 0) {
@@ -57,7 +57,7 @@ onValue(sortedActivityQuery, (snapshot) => {
                           <td style="text-align: left;">${date.toLocaleDateString('id-ID')}</td>
                           <td style="text-align: left;">${shipper_}</td>
                           <td style="text-align: left;">${noBookingWithoutSymbol}</td>
-                          <td style="text-align: left;">${customer}</td>
+                          <td>${customer}</td>
                           <td>${status}</td>
                           <td><a href="addData?shipper=${shipperKey}&no_booking=${noBookingKey}&container=${containerKey}" class="btn btn-primary">Edit</a></td>
                           <td><a href="showData?shipper=${shipperKey}&no_booking=${noBookingKey}" class="btn btn-success">Show</a></td>
@@ -131,18 +131,14 @@ function handleSearch() {
     const dateCell = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
     const noBookingCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
     const shipperCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-    const customerCell = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-    const statusCell = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
 
     // Periksa apakah baris data cocok dengan pencarian
     const dateMatch = dateCell.includes(searchTerm);
     const noBookingMatch = noBookingCell.includes(searchTerm);
     const shipperMatch = shipperCell.includes(searchTerm);
-    const customerMatch = customerCell.includes(searchTerm);
-    const statusMatch = statusCell.includes(searchTerm);
 
     // Tampilkan atau sembunyikan baris sesuai dengan pencarian
-    if (dateMatch || noBookingMatch || shipperMatch || customerMatch || statusMatch) {
+    if (dateMatch || noBookingMatch || shipperMatch) {
       row.style.display = ''; // Tampilkan baris
     } else {
       row.style.display = 'none'; // Sembunyikan baris

@@ -39,15 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-    // // Meng-handle klik tombol "Close This Activity"
-    // document.getElementById("closeActivityButton").addEventListener("click", function () {
-    //   // Menampilkan modal konfirmasi
-    //   const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-    //   confirmationModal.show();
-    // });
-
 // Meng-handle klik tombol "Close This Activity"
 document.getElementById("closeActivityButton").addEventListener("click", function () {
   // Memanggil fungsi untuk mengecek apakah semua container memiliki status "COMPLETE"

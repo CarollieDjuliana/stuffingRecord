@@ -381,7 +381,7 @@
         </table>
         <table class="bottom">
             <tr>
-                <th style="display:flex;">DATE : <div style="margin-left: 10px;" id="stuffing_date_container_1"></div>
+                <th style="display:flex;">DATE : <div style="margin-left: 10px;" id="date"></div>
                 </th>
             </tr>
         </table>

@@ -31,6 +31,7 @@ get(dataRef)
             document.getElementById("port_of_loading").textContent = data.port_of_loading;
             document.getElementById("destination").textContent = data.destination;
             document.getElementById("etd").textContent = data.etd;
+            document.getElementById("date").textContent = data.date;
             document.getElementById("stuffing_place").textContent = data.stuffing_place;
             document.getElementById("stuffing_by").textContent = data.stuffing_by;
             document.getElementById("location").textContent = data.location;
@@ -39,18 +40,18 @@ get(dataRef)
 
 
  // Mencetak data kontainer untuk setiap kontainer dalam data.container_data
- let isFirstContainer = true; // Tambahkan variabel ini
+//  let isFirstContainer = true; // Tambahkan variabel ini
  for (const containerNumber in data.container_data) {
     const containerData = data.container_data[containerNumber];
     
     // Tambahkan logika untuk mendapatkan stuffing_date dari container pertama
-    if (isFirstContainer) {
-        const stuffingDateContainer1 = document.getElementById("stuffing_date_container_1");
-        if (stuffingDateContainer1) {
-            stuffingDateContainer1.textContent = containerData.stuffing_date;
-        }
-        isFirstContainer = false;
-    }
+    // if (isFirstContainer) {
+    //     const stuffingDateContainer1 = document.getElementById("stuffing_date_container_1");
+    //     if (stuffingDateContainer1) {
+    //         stuffingDateContainer1.textContent = containerData.stuffing_date;
+    //     }
+    //     isFirstContainer = false;
+    // }
     printContainerData(containerNumber, containerData);
 }
 } else {

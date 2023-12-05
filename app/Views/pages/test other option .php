@@ -16,8 +16,8 @@
     <form id="myForm">
         <label for="options">Pilih Opsi:</label>
         <select id="options" onchange="showOtherOption()">
-            <option value="option1">Opsi 1</option>
-            <option value="option2">Opsi 2</option>
+            <option>Opsi 1</option>
+            <option>Opsi 2</option>
             <option value="other">Lainnya</option>
         </select>
 

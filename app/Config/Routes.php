@@ -12,6 +12,7 @@ $routes->get('/login', 'Pages::login');
 $routes->get('/register', 'Pages::register');
 $routes->get('/logout', 'Pages::logout');
 $routes->get('/dashboard', 'Pages::dashboard');
+$routes->get('/activity', 'Pages::activity');
 $routes->add('addActivityContainer/sendDataToFirebase', 'AddActivityContainer::sendDataToFirebase');
 
 // $routes->add('dashboard', 'Pages::dashboard');

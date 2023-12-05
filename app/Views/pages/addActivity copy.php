@@ -11,35 +11,14 @@
                 <div class="col-md-6">
                     <label for="shipper" class="form-label mt-3">SHIPPER</label>
                     <select class="form-select" id="shipper" name="shipper" required>
-                        <option>PT ANEKA BUMI PRATAMA</option>
-                        <option>PT BINTANG AGUNG PERSADA</option>
-                        <option>PT BINTANG GASING PERSADA</option>
-                        <option>PT BUKIT ANGKASA MAKMUR</option>
-                        <option>PT BUMI BELITI ABADI</option>
-                        <option>PT GADJAH RUKU</option>
-                        <option>PT HOKTONG</option>
-                        <option>PT KARET BATIN DELAPAN</option>
-                        <option>PT KARINI UTAMA</option>
-                        <option>PT KIRANA MUSI PERSADA</option>
-                        <option>PT KIRANA PERMATA</option>
-                        <option>PT KIRANA WINDU</option>
-                        <option>PT KOMERING JAYA PERDANA</option>
-                        <option>PT LINGGA DJAJA</option>
-                        <option>PT MARDEC MUSI LESTARI</option>
-                        <option>PT PANCA SAMUDERA SIMPATI</option>
-                        <option>PT PERKEBUNAN NUSANTARA VII</option>
-                        <option>PT PINAGO UTAMA</option>
-                        <option>PT REMCO</option>
-                        <option>PT STAR RUBBER</option>
-                        <option>PT SRI TRANG LINGGA INDONESIA</option>
-                        <option>PT SUNAN RUBBER</option>
-                        <option>PT WARNA AGUNG SELATAN</option>
+                        <option value="Maersk">Maersk</option>
+                        <option value="APL">APL</option>
                         <option value="other">Other</option>
                     </select>
 
                     <div id="otherShipper" style="display:none;">
                         <label for="other_shipper" class="form-label mt-3">Other Shipper :</label>
-                        <input type="text" class="form-control" id="other_shipper" name="other_shipper" placeholder="data tanpa titik atau simbol lainnya">
+                        <input type="text" class="form-control" id="other_shipper" name="other_shipper">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -69,19 +48,8 @@
                 <div class="col-md-6">
                     <label for="shipping_line" class="form-label mt-3">SHIPPING LINE</label>
                     <select class="form-select" id="shipping_line" name="shipping_line" required>
-                        <option>MAERSK LINE</option>
-                        <option>COSCO</option>
-                        <option>ONE INDONESIA</option>
-                        <option>HAPAG LLOYD</option>
-                        <option>OOCL</option>
-                        <option>EVERGREEN</option>
-                        <option>CMA</option>
-                        <option>SSL</option>
-                        <option>RCL</option>
-                        <option>WANHAI</option>
-                        <option>MSC</option>
-                        <option>YANG MING</option>
-                        <option>SINOKOR</option>
+                        <option value="Maersk">Maersk</option>
+                        <option value="APL">APL</option>
                         <option value="other">Other</option>
                     </select>
 
@@ -93,16 +61,8 @@
                 <div class="col-md-6">
                     <label for="customer" class="form-label mt-3">CUSTOMER</label>
                     <select class="form-select" id="customer" name="customer" required>
-                        <option>HAPAG LLOYD</option>
-                        <option>MTKI</option>
-                        <option>SAMUDERA AGENCIES INDONESIA</option>
-                        <option>ONE INDONESIA</option>
-                        <option>MSC</option>
-                        <option>EVERGREEN</option>
-                        <option>GLOBAL TRANSPORTASI NUSANTARA</option>
-                        <option>CONTAINER MARITIME ACTIVITIES</option>
-                        <option>OOCL INDONESIA</option>
-                        <option>YANG MING</option>
+                        <option value="Maersk">customer1</option>
+                        <option value="APL">customer2</option>
                         <option value="other">Other</option>
                     </select>
 
@@ -113,21 +73,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="vessel_name" class="form-label mt-3">VESSEL NAME</label>
-                    <select id="vessel_name" class="form-select" name="vessel_name" required>
-                        <option>JOHAN FORTUNE</option>
-                        <option>ATI BHUM</option>
-                        <option>SINAR PENIDA</option>
-                        <option>JML FORTUNE</option>
-                        <option>SEJAHTERA</option>
-                        <option>LINTAS BRANTAS</option>
-                        <option>BENGAWAN MAS</option>
-                        <option>LL 2517</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <div id="otherVesselName" style="display:none;">
-                        <label for="other_vessel_name" class="form-label mt-3">Other Vessel Name :</label>
-                        <input type="text" class="form-control" id="other_vessel_name" name="other_vessel_name" required>
-                    </div>
+                    <input type="text" class="form-control" id="vessel_name" name="vessel_name" required>
                 </div>
                 <div class="col-md-6">
                     <label for="voyage" class="form-label mt-3">VOYAGE</label>
@@ -146,8 +92,8 @@
                     <input type="date" class="form-control" id="etd" name="etd" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="date" class="form-label mt-3">STUFFING DATE</label>
-                    <input type="date" class="form-control" id="date" name="date" required>
+                    <label for="stuffing_date" class="form-label mt-3">STUFFING DATE</label>
+                    <input type="date" class="form-control" id="stuffing_date" name="stuffing_date" required>
                 </div>
                 <div class="col-md-6">
                     <label for="stuffing_place" class="form-label mt-3">STUFFING PLACE</label>
@@ -158,9 +104,12 @@
                     <select id="stuffing_place" class="form-select" name="stuffing_place" required>
                         <option selected>CONTAINER YARD / TRUCKS</option>
                         <option>CONTAINER YARD / BARGES</option>
-                        <option>CONTAINER YARD / WAREHOUSE</option>
-                        <option>CONTAINER YARD</option>
+                        <option value="other">Other</option>
                     </select>
+                    <div id="otherStuffingPlace" style="display:none;">
+                        <label for="other_stuffing_place" class="form-label mt-3">Other Stuffing Place :</label>
+                        <input type="text" class="form-control" id="other_stuffing_place" name="other_stuffing_place" required>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <label for="stuffing_by" class="form-label mt-3">STUFFING BY</label>
@@ -262,7 +211,7 @@
         }
     });
 
-    // Function to handle the change event of the stuffing_place dropdown
+    // Function to handle the change event of the inspected_by dropdown
     document.getElementById('stuffing_place').addEventListener('change', function() {
         var otherStuffingPlaceContainer = document.getElementById('otherStuffingPlace');
         var otherInput = document.getElementById('other_stuffing_place');
@@ -272,48 +221,6 @@
             otherInput.setAttribute('required', 'required');
         } else {
             otherStuffingPlaceContainer.style.display = 'none';
-            otherInput.removeAttribute('required');
-        }
-    });
-
-    // Function to handle the change event of the shipper dropdown
-    document.getElementById('shipper').addEventListener('change', function() {
-        var otherShipper = document.getElementById('otherShipper');
-        var otherInput = document.getElementById('other_shipper');
-
-        if (this.value === 'other') {
-            otherShipper.style.display = 'block';
-            otherInput.setAttribute('required', 'required');
-        } else {
-            otherShipper.style.display = 'none';
-            otherInput.removeAttribute('required');
-        }
-    });
-
-    // Function to handle the change event of the customer dropdown
-    document.getElementById('customer').addEventListener('change', function() {
-        var otherCustomer = document.getElementById('otherCustomer');
-        var otherInput = document.getElementById('other_customer');
-
-        if (this.value === 'other') {
-            otherCustomer.style.display = 'block';
-            otherInput.setAttribute('required', 'required');
-        } else {
-            otherCustomer.style.display = 'none';
-            otherInput.removeAttribute('required');
-        }
-    });
-
-    // Function to handle the change event of the customer dropdown
-    document.getElementById('vessel_name').addEventListener('change', function() {
-        var otherVesselName = document.getElementById('otherVesselName');
-        var otherInput = document.getElementById('other_vessel_name');
-
-        if (this.value === 'other') {
-            otherVesselName.style.display = 'block';
-            otherInput.setAttribute('required', 'required');
-        } else {
-            otherVesselName.style.display = 'none';
             otherInput.removeAttribute('required');
         }
     });
@@ -340,25 +247,10 @@
     // Function to save data from the first page
     function saveData() {
         const formElements = [
-            'shipper',
-            'no_booking',
-            'quantity',
-            'term',
-            'commodity',
-            'grade',
-            'shipping_line',
-            'vessel_name',
-            'voyage',
-            'port_of_loading',
-            'destination',
-            'etd',
-            'date',
-            'stuffing_place',
-            'stuffing_by',
-            'location',
-            'weather',
-            'inspected_by',
-            'customer',
+            'shipper', 'no_booking', 'quantity', 'date', 'term', 'commodity', 'grade',
+            'shipping_line', 'vessel_name', 'voyage', 'port_of_loading', 'destination',
+            'etd', 'stuffing_date', 'stuffing_place', 'stuffing_by', 'location', 'weather', 'inspected_by',
+            'customer'
         ];
 
         const formData = {};
@@ -370,115 +262,91 @@
                 formData[elementId] = element.value;
                 if (!formData[elementId]) {
                     isValid = false;
-                    alert(`Please fill in the "${elementId}" field before proceeding to the next form.`);
                 }
             }
-
         });
 
-        const temp_noBooking = document.getElementById('no_booking');
-        formData['no_booking'] = temp_noBooking.value.replace(/\s/g, '');
-
         // Check if custom location input is visible and has a value
-        const shipperInput = document.getElementById('shipper');
-        if (shipperInput.value === 'other') {
-            const otherShipperInput = document.getElementById('other_shipper');
-            if (otherShipperInput) {
-                formData['shipper'] = otherShipperInput.value;
+        const shipper = document.getElementById('shipper');
+        if (location.value === 'other') {
+            const othershipping_line = document.getElementById('other_shipper');
+            if (othershipping_line) {
+                formData['shipper'] = othershipping_line.value;
                 if (!formData['shipper']) {
                     isValid = false;
-                    alert('Please fill in the "location" field before proceeding to the next form.');
                 }
             }
         }
 
-
         // Check if custom location input is visible and has a value
-        const locationInput = document.getElementById('location');
-        if (locationInput.value === 'other') {
+        const location = document.getElementById('location');
+        if (location.value === 'other') {
             const otherLocationInput = document.getElementById('other_location');
             if (otherLocationInput) {
                 formData['location'] = otherLocationInput.value;
                 if (!formData['location']) {
                     isValid = false;
-                    alert('Please fill in the "location" field before proceeding to the next form.');
                 }
             }
         }
 
-        // Check if custom shipping line input is visible and has a value
-        const shippingLineInput = document.getElementById('shipping_line');
-        if (shippingLineInput.value === 'other') {
-            const otherShippingLineInput = document.getElementById('other_shipping_line');
-            if (otherShippingLineInput) {
-                formData['shipping_line'] = otherShippingLineInput.value;
+        // Check if custom location input is visible and has a value
+        const shipping_line = document.getElementById('shipping_line');
+        if (location.value === 'other') {
+            const othershipping_line = document.getElementById('other_shipping_line');
+            if (othershipping_line) {
+                formData['shipping_line'] = othershipping_line.value;
                 if (!formData['shipping_line']) {
                     isValid = false;
-                    alert('Please fill in the "shipping_line" field before proceeding to the next form.');
                 }
             }
         }
 
-        // Check if custom customer input is visible and has a value
-        const customerInput = document.getElementById('customer');
-        if (customerInput.value === 'other') {
-            const otherCustomerInput = document.getElementById('other_customer');
-            if (otherCustomerInput) {
-                formData['customer'] = otherCustomerInput.value;
+        // Check if custom location input is visible and has a value
+        const customer = document.getElementById('customer');
+        if (location.value === 'other') {
+            const otherCustomer = document.getElementById('other_customer');
+            if (otherCustomer) {
+                formData['customer'] = otherCustomer.value;
                 if (!formData['customer']) {
                     isValid = false;
-                    alert('Please fill in the "customer" field before proceeding to the next form.');
                 }
             }
         }
 
-        // Check if custom inspected_by input is visible and has a value
-        const inspectedByInput = document.getElementById('inspected_by');
-        if (inspectedByInput.value === 'other') {
-            const otherInspectedByInput = document.getElementById('other_inspected_by');
-            if (otherInspectedByInput) {
-                formData['inspected_by'] = otherInspectedByInput.value;
+        // Check if custom location input is visible and has a value
+        const inspected_by = document.getElementById('inspected_by');
+        if (location.value === 'other') {
+            const otherinspected_by = document.getElementById('other_inspected_by');
+            if (otherinspected_by) {
+                formData['inspected_by'] = otherinspected_by.value;
                 if (!formData['inspected_by']) {
                     isValid = false;
-                    alert('Please fill in the "inspected_by" field before proceeding to the next form.');
                 }
             }
         }
 
-        // Check if custom stuffing_place input is visible and has a value
-        const stuffingPlaceInput = document.getElementById('stuffing_place');
-        if (stuffingPlaceInput.value === 'other') {
-            const otherStuffingPlaceInput = document.getElementById('other_stuffing_place');
-            if (otherStuffingPlaceInput) {
-                formData['stuffing_place'] = otherStuffingPlaceInput.value;
+
+        // Check if custom location input is visible and has a value
+        const stuffing_place = document.getElementById('stuffing_place');
+        if (location.value === 'other') {
+            const otherinspected_by = document.getElementById('other_stuffing_place');
+            if (otherinspected_by) {
+                formData['stuffing_place'] = otherinspected_by.value;
                 if (!formData['stuffing_place']) {
                     isValid = false;
-                    alert('Please fill in the "stuffing_place" field before proceeding to the next form.');
                 }
             }
         }
-
-        // Check if custom inspected_by input is visible and has a value
-        const vesselNameInput = document.getElementById('vessel_name');
-        if (vesselNameInput.value === 'other') {
-            const otherVesselNameInput = document.getElementById('other_vessel_name');
-            if (otherVesselNameInput) {
-                formData['vessel_name'] = otherVesselNameInput.value;
-                if (!formData['vessel_name']) {
-                    isValid = false;
-                    alert('Please fill in the "inspected_by" field before proceeding to the next form.');
-                }
-            }
-        }
-
 
         if (isValid) {
             localStorage.setItem('dataForm1', JSON.stringify(formData));
             window.location.href = '/addActivityContainer';
         } else {
-            // alert('Please fill in all fields before proceeding to the next form.');
+            alert('Please fill in all fields before proceeding to the next form.');
         }
     }
+
 
     // Function to cancel the process and go back to the previous page
     function cancel() {
@@ -489,11 +357,9 @@
     // Function to load saved data when the page loads
     function loadSavedData() {
         const savedData = localStorage.getItem('dataForm1');
-
-
-
         if (savedData) {
             const formData = JSON.parse(savedData);
+
             Object.keys(formData).forEach(key => {
                 const element = document.getElementById(key);
                 if (element) {
